@@ -20,28 +20,32 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
+  <meta name="description" content="一、什么是跨域？先来了解2个概念  浏览器的同源策略出于安全的考虑，同源策略控制了从一个源加载的文档或脚本如何与来自另一个源的资源进行交互，例如使用XMLHttpRequest时就会受到同源策略的约束。  同源的定义只有当两个站点的协议，主机，端口号全部相同才算是同源，下表是同源策略的检测示例：   URL    结果    原因http:&#x2F;&#x2F;store.company.com&#x2F;dir2&#x2F;othe">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:url" content="http://example.com/2021/03/29/test/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一、什么是跨域？先来了解2个概念  浏览器的同源策略出于安全的考虑，同源策略控制了从一个源加载的文档或脚本如何与来自另一个源的资源进行交互，例如使用XMLHttpRequest时就会受到同源策略的约束。  同源的定义只有当两个站点的协议，主机，端口号全部相同才算是同源，下表是同源策略的检测示例：   URL    结果    原因http:&#x2F;&#x2F;store.company.com&#x2F;dir2&#x2F;othe">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-03-29T12:05:19.430Z">
+<meta property="article:modified_time" content="2021-03-29T12:05:19.430Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2021/03/29/test/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Hexo</title>
+  <title> | Hexo</title>
   
 
 
@@ -139,79 +143,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/29/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/29/hello-world/" class="post-title-link" itemprop="url">Test111</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-03-29 12:05:19" itemprop="dateCreated datePublished" datetime="2021-03-29T12:05:19+00:00">2021-03-29</time>
-            </span>
-
-          
-
-        </div>
-      </header>
 
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
@@ -227,10 +162,9 @@
       <meta itemprop="name" content="Hexo">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
+        <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2021/03/29/test/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -253,7 +187,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>一、什么是跨域？<br>先来了解2个概念</p>
+        <p>一、什么是跨域？<br>先来了解2个概念</p>
 <ol>
 <li><p>浏览器的同源策略<br>出于安全的考虑，同源策略控制了从一个源加载的文档或脚本如何与来自另一个源的资源进行交互，例如使用XMLHttpRequest时就会受到同源策略的约束。</p>
 </li>
@@ -306,21 +240,30 @@
 <p>三、参考来源<br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy">https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy</a></p>
 <p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS">https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS</a></p>
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/03/29/hello-world/" rel="next" title="Test111">
+      Test111 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
+    
   </article>
   
   
-  
-
-
   
 
 
@@ -373,6 +316,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%81%87%E8%AE%BE%E6%88%91%E4%BB%AC%E7%9A%84%E4%B8%BB%E7%AB%99%E7%82%B9-book-doctoroyy-net-%E8%A6%81%E4%BB%8E-api-doctoroyy-net-%E6%8B%BF%E6%95%B0%E6%8D%AE%EF%BC%8C"><span class="nav-number">1.</span> <span class="nav-text">假设我们的主站点 book.doctoroyy.net 要从 api.doctoroyy.net 拿数据，</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%82%A3%E4%B9%88%E6%89%BE%E5%88%B0%E4%B8%BB%E7%AB%99%E7%82%B9%E7%9A%84-nginx-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%EF%BC%8C%E5%8A%A0%E5%85%A5%E8%BF%99%E4%BA%9B%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">那么找到主站点的 nginx 配置文件，加入这些配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#book-doctoroyy-net-conf"><span class="nav-number">3.</span> <span class="nav-text">book.doctoroyy.net.conf</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#book-doctoroyy-net-conf-1"><span class="nav-number">4.</span> <span class="nav-text">book.doctoroyy.net.conf</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%83%8F%E4%B8%80%E4%BA%9B%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E7%9A%84%E8%AF%B7%E6%B1%82%E5%B9%B6%E4%B8%8D%E9%9C%80%E8%A6%81%E8%BD%AC%E5%8F%91%E5%88%B0node%E6%9C%8D%E5%8A%A1"><span class="nav-number">5.</span> <span class="nav-text">像一些静态资源的请求并不需要转发到node服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%81%87%E8%AE%BE%E6%8B%A6%E6%88%AA%E5%88%B0%E8%AF%B7%E6%B1%82-https-book-doctoroyy-net-api-getAll"><span class="nav-number">6.</span> <span class="nav-text">假设拦截到请求 https:&#x2F;&#x2F;book.doctoroyy.net&#x2F;api&#x2F;getAll</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%91-https-api-doctoroyy-net-getAll-%E5%8F%91%E9%80%81%E8%AF%B7%E6%B1%82"><span class="nav-number">7.</span> <span class="nav-text">向 https:&#x2F;&#x2F;api.doctoroyy.net&#x2F;getAll 发送请求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#response-%E6%9D%A5%E8%87%AA-https-api-doctoroyy-net-getAll-%E7%9A%84%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C"><span class="nav-number">8.</span> <span class="nav-text">response &#x3D; 来自 https:&#x2F;&#x2F;api.doctoroyy.net&#x2F;getAll 的返回结果</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#return-response"><span class="nav-number">9.</span> <span class="nav-text">return response;</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
