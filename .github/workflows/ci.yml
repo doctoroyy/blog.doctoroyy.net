@@ -27,7 +27,9 @@ jobs:
     - name: Generate
       run: yarn && yarn g
     - name: Push changes
-      uses: ad-m/github-push-action@master
+      uses: peaceiris/actions-gh-pages@v2
+      env:
+        ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+        PUBLISH_BRANCH: gh-pages
       with:
-        remote: gh-pages
-        token: ${{ secrets.GITHUB_TOKEN }}
+        emptyCommits: false
