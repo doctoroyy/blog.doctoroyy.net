@@ -27,11 +27,10 @@ jobs:
     - name: Generate
       run: yarn && yarn g
     - name: Push changes
-      uses: peaceiris/actions-gh-pages@v2
+      uses: peaceiris/actions-gh-pages@v3
       env:
-        ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-        PUBLISH_BRANCH: gh-pages
-        PUBLISH_DIR: ./public
-        exclude_assets: CNAME
+        deploy+key: ${{ secrets.GITHUB_TOKEN }}
+        public_dir: ./public
+        cname: blog.doctoroyy.net
       with:
         emptyCommits: false
