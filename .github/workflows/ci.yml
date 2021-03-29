@@ -30,4 +30,4 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         remote: gh-pages
-        token: ${{ secrets.TOKEN }}
+        token: ${{ secrets.GITHUB_TOKEN }}
