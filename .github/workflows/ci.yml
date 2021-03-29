@@ -28,9 +28,7 @@ jobs:
       run: yarn && yarn g
     - name: Push changes
       uses: peaceiris/actions-gh-pages@v3
-      env:
+      with:
         deploy_key: ${{ secrets.GITHUB_TOKEN }}
         public_dir: ./public
         cname: blog.doctoroyy.net
-      with:
-        emptyCommits: false
