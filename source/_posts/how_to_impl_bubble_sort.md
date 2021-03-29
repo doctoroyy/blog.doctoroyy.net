@@ -12,7 +12,7 @@ categories: 学习
 - 实现思路
 
 
-使用js移动元素位置，利用css的transition属性实现过渡动画。[在线体验](https://visualgo.doctoroyy.cf/)
+使用js移动元素位置，利用css的transition属性实现过渡动画。[在线体验](https://visualgo.doctoroyy.net/)
 
 创建一个数组arr，数组的每一项保存着节点元素的文本值(innerText)和元素在节点列表中的索引nodeIndex, 因为接下来的并不是真的交换两个节点，而是交换两个节点的位置（可能有点不好理解）。
 <!-- more -->
