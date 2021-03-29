@@ -1,0 +1,2186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://s1.vika.cn/space/2021/01/22/cb972124b3ca4f2daebd9a963d8bbc8a?attname=crop_20210121143805.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://s1.vika.cn/space/2021/01/22/cb972124b3ca4f2daebd9a963d8bbc8a?attname=crop_20210121143805.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.doctoroyy.net","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="IMDB 是全球信息量最大最全的电影数据库网站。它有一套极其严格的打分机制 “贝叶斯算法”，对评分者有一定的要求，对恶意投票等都有相应的预防措施。 IMDB TOP 250 是全球最权威互联网电影资料库里很受欢迎的特色栏目，列出了注册用户投票选出的有史以来最佳 250 部电影。如果只能选择一个榜单来当做选片标准，不妨从这个榜单开始。 以下是IMDB TOP 250 的最新榜单，数据更新于2020&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IMDB TOP 250 电影榜单">
+<meta property="og:url" content="https://blog.doctoroyy.net/2019/06/30/IMDB-TOP-250/index.html">
+<meta property="og:site_name" content="xiaoyu&#39;s blog">
+<meta property="og:description" content="IMDB 是全球信息量最大最全的电影数据库网站。它有一套极其严格的打分机制 “贝叶斯算法”，对评分者有一定的要求，对恶意投票等都有相应的预防措施。 IMDB TOP 250 是全球最权威互联网电影资料库里很受欢迎的特色栏目，列出了注册用户投票选出的有史以来最佳 250 部电影。如果只能选择一个榜单来当做选片标准，不妨从这个榜单开始。 以下是IMDB TOP 250 的最新榜单，数据更新于2020&#x2F;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-06-30T11:12:40.000Z">
+<meta property="article:modified_time" content="2021-03-29T14:47:33.729Z">
+<meta property="article:author" content="xiaoyu">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://blog.doctoroyy.net/2019/06/30/IMDB-TOP-250/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>IMDB TOP 250 电影榜单 | xiaoyu's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">xiaoyu's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Coding for a better life!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.doctoroyy.net/2019/06/30/IMDB-TOP-250/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s1.vika.cn/space/2021/01/22/cb972124b3ca4f2daebd9a963d8bbc8a?attname=crop_20210121143805.jpg">
+      <meta itemprop="name" content="xiaoyu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaoyu's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          IMDB TOP 250 电影榜单
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-30 19:12:40" itemprop="dateCreated datePublished" datetime="2019-06-30T19:12:40+08:00">2019-06-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-03-29 22:47:33" itemprop="dateModified" datetime="2021-03-29T22:47:33+08:00">2021-03-29</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>IMDB 是全球信息量最大最全的电影数据库网站。它有一套极其严格的打分机制 “贝叶斯算法”，对评分者有一定的要求，对恶意投票等都有相应的预防措施。</p>
+<p><a target="_blank" rel="noopener" href="https://www.imdb.com/chart/top">IMDB TOP 250</a> 是全球最权威互联网电影资料库里很受欢迎的特色栏目，列出了注册用户投票选出的有史以来最佳 250 部电影。如果只能选择一个榜单来当做选片标准，不妨从这个榜单开始。</p>
+<p>以下是IMDB TOP 250 的最新榜单，数据更新于2020/9/25。</p>
+<span id="more"></span>
+
+<table>
+<thead>
+<tr>
+<th>排名</th>
+<th>影片名（中）</th>
+<th>影片名（英）</th>
+<th>导演</th>
+<th>上映年份</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>肖申克的救赎</td>
+<td>The Shawshank Redemption</td>
+<td>弗兰克·德拉邦特</td>
+<td>1994</td>
+</tr>
+<tr>
+<td>2</td>
+<td>教父</td>
+<td>The Godfather</td>
+<td>弗朗西斯·福特·科波拉</td>
+<td>1972</td>
+</tr>
+<tr>
+<td>3</td>
+<td>教父2</td>
+<td>The Godfather: Part II</td>
+<td>弗朗西斯·福特·科波拉</td>
+<td>1974</td>
+</tr>
+<tr>
+<td>4</td>
+<td>蝙蝠侠：黑暗骑士</td>
+<td>The Dark Knight</td>
+<td>克里斯托弗·诺兰</td>
+<td>2008</td>
+</tr>
+<tr>
+<td>5</td>
+<td>十二怒汉</td>
+<td>12 Angry Men</td>
+<td>西德尼·吕美特</td>
+<td>1957</td>
+</tr>
+<tr>
+<td>6</td>
+<td>辛德勒的名单</td>
+<td>Schindler’s List</td>
+<td>史蒂文·斯皮尔伯格</td>
+<td>1993</td>
+</tr>
+<tr>
+<td>7</td>
+<td>指环王3：王者无敌</td>
+<td>The Lord of the Rings: The Return of the King</td>
+<td>彼得·杰克逊</td>
+<td>2003</td>
+</tr>
+<tr>
+<td>8</td>
+<td>低俗小说</td>
+<td>Pulp Fiction</td>
+<td>昆汀·塔伦蒂诺</td>
+<td>1994</td>
+</tr>
+<tr>
+<td>9</td>
+<td>黄金三镖客</td>
+<td>The Good, the Bad and the Ugly</td>
+<td>赛尔乔·莱昂内</td>
+<td>1966</td>
+</tr>
+<tr>
+<td>10</td>
+<td>指环王1：魔戒再现</td>
+<td>The Lord of the Rings: The Fellowship of the Ring</td>
+<td>彼得·杰克逊</td>
+<td>2001</td>
+</tr>
+<tr>
+<td>11</td>
+<td>搏击俱乐部</td>
+<td>Fight Club</td>
+<td>大卫·芬奇</td>
+<td>1999</td>
+</tr>
+<tr>
+<td>12</td>
+<td>阿甘正传</td>
+<td>Forrest Gump</td>
+<td>罗伯特·泽米吉斯</td>
+<td>1994</td>
+</tr>
+<tr>
+<td>13</td>
+<td>盗梦空间</td>
+<td>Inception</td>
+<td>克里斯托弗·诺兰</td>
+<td>2010</td>
+</tr>
+<tr>
+<td>14</td>
+<td>星球大战2：帝国反击战</td>
+<td>Star Wars: Episode V - The Empire Strikes Back</td>
+<td>厄文·克什纳</td>
+<td>1980</td>
+</tr>
+<tr>
+<td>15</td>
+<td>指环王2：双塔奇兵</td>
+<td>The Lord of the Rings: The Two Towers</td>
+<td>彼得·杰克逊</td>
+<td>2002</td>
+</tr>
+<tr>
+<td>16</td>
+<td>黑客帝国</td>
+<td>The Matrix</td>
+<td>莉莉·沃卓斯基</td>
+<td>1999</td>
+</tr>
+<tr>
+<td>17</td>
+<td>好家伙</td>
+<td>Goodfellas</td>
+<td>马丁·斯科塞斯</td>
+<td>1990</td>
+</tr>
+<tr>
+<td>18</td>
+<td>飞越疯人院</td>
+<td>One Flew Over the Cuckoo’s Nest</td>
+<td>米洛斯·福尔曼</td>
+<td>1975</td>
+</tr>
+<tr>
+<td>19</td>
+<td>七武士</td>
+<td>Seven Samurai</td>
+<td>黑泽明</td>
+<td>1954</td>
+</tr>
+<tr>
+<td>20</td>
+<td>七宗罪</td>
+<td>Se7en</td>
+<td>大卫·芬奇</td>
+<td>1995</td>
+</tr>
+<tr>
+<td>21</td>
+<td>美丽人生</td>
+<td>Life Is Beautiful</td>
+<td>罗伯托·贝尼尼</td>
+<td>1997</td>
+</tr>
+<tr>
+<td>22</td>
+<td>上帝之城</td>
+<td>City of God</td>
+<td>费尔南多·梅里尔斯</td>
+<td>2002</td>
+</tr>
+<tr>
+<td>23</td>
+<td>沉默的羔羊</td>
+<td>The Silence of the Lambs</td>
+<td>乔纳森·戴米</td>
+<td>1991</td>
+</tr>
+<tr>
+<td>24</td>
+<td>生活多美好</td>
+<td>It’s a Wonderful Life</td>
+<td>弗兰克·卡普拉</td>
+<td>1946</td>
+</tr>
+<tr>
+<td>25</td>
+<td>星球大战</td>
+<td>Star Wars: Episode IV - A New Hope</td>
+<td>乔治·卢卡斯</td>
+<td>1977</td>
+</tr>
+<tr>
+<td>26</td>
+<td>拯救大兵瑞恩</td>
+<td>Saving Private Ryan</td>
+<td>史蒂文·斯皮尔伯格</td>
+<td>1998</td>
+</tr>
+<tr>
+<td>27</td>
+<td>千与千寻</td>
+<td>Spirited Away</td>
+<td>宫崎骏</td>
+<td>2001</td>
+</tr>
+<tr>
+<td>28</td>
+<td>绿里奇迹</td>
+<td>The Green Mile</td>
+<td>弗兰克·德拉邦特</td>
+<td>1999</td>
+</tr>
+<tr>
+<td>29</td>
+<td>寄生虫</td>
+<td>Parasite</td>
+<td>奉俊昊</td>
+<td>2019</td>
+</tr>
+<tr>
+<td>30</td>
+<td>星际穿越</td>
+<td>Interstellar</td>
+<td>克里斯托弗·诺兰</td>
+<td>2014</td>
+</tr>
+<tr>
+<td>31</td>
+<td>这个杀手不太冷</td>
+<td>Léon: The Professional</td>
+<td>吕克·贝松</td>
+<td>1994</td>
+</tr>
+<tr>
+<td>32</td>
+<td>非常嫌疑犯</td>
+<td>The Usual Suspects</td>
+<td>布莱恩·辛格</td>
+<td>1995</td>
+</tr>
+<tr>
+<td>33</td>
+<td>切腹</td>
+<td>Harakiri</td>
+<td>小林正树</td>
+<td>1962</td>
+</tr>
+<tr>
+<td>34</td>
+<td>狮子王</td>
+<td>The Lion King</td>
+<td>罗杰·阿勒斯</td>
+<td>1994</td>
+</tr>
+<tr>
+<td>35</td>
+<td>汉密尔顿</td>
+<td>Hamilton</td>
+<td>托马斯·凯尔</td>
+<td>2020</td>
+</tr>
+<tr>
+<td>36</td>
+<td>回到未来</td>
+<td>Back to the Future</td>
+<td>罗伯特·泽米吉斯</td>
+<td>1985</td>
+</tr>
+<tr>
+<td>37</td>
+<td>钢琴家</td>
+<td>The Pianist</td>
+<td>罗曼·波兰斯基</td>
+<td>2002</td>
+</tr>
+<tr>
+<td>38</td>
+<td>终结者2：审判日</td>
+<td>Terminator 2: Judgment Day</td>
+<td>詹姆斯·卡梅隆</td>
+<td>1991</td>
+</tr>
+<tr>
+<td>39</td>
+<td>美国X档案</td>
+<td>American History X</td>
+<td>托尼·凯耶</td>
+<td>1998</td>
+</tr>
+<tr>
+<td>40</td>
+<td>摩登时代</td>
+<td>Modern Times</td>
+<td>查理·卓别林</td>
+<td>1936</td>
+</tr>
+<tr>
+<td>41</td>
+<td>惊魂记</td>
+<td>Psycho</td>
+<td>阿尔弗雷德·希区柯克</td>
+<td>1960</td>
+</tr>
+<tr>
+<td>42</td>
+<td>角斗士</td>
+<td>Gladiator</td>
+<td>雷德利·斯科特</td>
+<td>2000</td>
+</tr>
+<tr>
+<td>43</td>
+<td>城市之光</td>
+<td>City Lights</td>
+<td>查理·卓别林</td>
+<td>1931</td>
+</tr>
+<tr>
+<td>44</td>
+<td>无间道风云</td>
+<td>The Departed</td>
+<td>马丁·斯科塞斯</td>
+<td>2006</td>
+</tr>
+<tr>
+<td>45</td>
+<td>触不可及</td>
+<td>The Intouchables</td>
+<td>奥利维埃·纳卡什</td>
+<td>2011</td>
+</tr>
+<tr>
+<td>46</td>
+<td>爆裂鼓手</td>
+<td>Whiplash</td>
+<td>达米恩·查泽雷</td>
+<td>2014</td>
+</tr>
+<tr>
+<td>47</td>
+<td>致命魔术</td>
+<td>The Prestige</td>
+<td>克里斯托弗·诺兰</td>
+<td>2006</td>
+</tr>
+<tr>
+<td>48</td>
+<td>萤火虫之墓</td>
+<td>Grave of the Fireflies</td>
+<td>高畑勋</td>
+<td>1988</td>
+</tr>
+<tr>
+<td>49</td>
+<td>西部往事</td>
+<td>Once Upon a Time in the West</td>
+<td>赛尔乔·莱昂内</td>
+<td>1968</td>
+</tr>
+<tr>
+<td>50</td>
+<td>卡萨布兰卡</td>
+<td>Casablanca</td>
+<td>迈克尔·柯蒂兹</td>
+<td>1942</td>
+</tr>
+<tr>
+<td>51</td>
+<td>天堂电影院</td>
+<td>Cinema Paradiso</td>
+<td>朱塞佩·托纳多雷</td>
+<td>1988</td>
+</tr>
+<tr>
+<td>52</td>
+<td>后窗</td>
+<td>Rear Window</td>
+<td>阿尔弗雷德·希区柯克</td>
+<td>1954</td>
+</tr>
+<tr>
+<td>53</td>
+<td>异形：契约</td>
+<td>Alien</td>
+<td>雷德利·斯科特</td>
+<td>1979</td>
+</tr>
+<tr>
+<td>54</td>
+<td>现代启示录</td>
+<td>Apocalypse Now</td>
+<td>弗朗西斯·福特·科波拉</td>
+<td>1979</td>
+</tr>
+<tr>
+<td>55</td>
+<td>记忆碎片</td>
+<td>Memento</td>
+<td>克里斯托弗·诺兰</td>
+<td>2000</td>
+</tr>
+<tr>
+<td>56</td>
+<td>夺宝奇兵</td>
+<td>Raiders of the Lost Ark</td>
+<td>史蒂文·斯皮尔伯格</td>
+<td>1981</td>
+</tr>
+<tr>
+<td>57</td>
+<td>大独裁者</td>
+<td>The Great Dictator</td>
+<td>查理·卓别林</td>
+<td>1940</td>
+</tr>
+<tr>
+<td>58</td>
+<td>小丑</td>
+<td>Joker</td>
+<td>托德·菲利普斯</td>
+<td>2019</td>
+</tr>
+<tr>
+<td>59</td>
+<td>被解救的姜戈</td>
+<td>Django Unchained</td>
+<td>昆汀·塔伦蒂诺</td>
+<td>2012</td>
+</tr>
+<tr>
+<td>60</td>
+<td>窃听风暴</td>
+<td>The Lives of Others</td>
+<td>弗洛里安·亨克尔·冯·多纳斯马尔克</td>
+<td>2006</td>
+</tr>
+<tr>
+<td>61</td>
+<td>光荣之路</td>
+<td>Paths of Glory</td>
+<td>斯坦利·库布里克</td>
+<td>1957</td>
+</tr>
+<tr>
+<td>62</td>
+<td>机器人总动员</td>
+<td>WALL·E</td>
+<td>安德鲁·斯坦顿</td>
+<td>2008</td>
+</tr>
+<tr>
+<td>63</td>
+<td>闪灵</td>
+<td>The Shining</td>
+<td>斯坦利·库布里克</td>
+<td>1980</td>
+</tr>
+<tr>
+<td>64</td>
+<td>复仇者联盟3：无限战争</td>
+<td>Avengers: Infinity War</td>
+<td>安东尼·罗素</td>
+<td>2018</td>
+</tr>
+<tr>
+<td>65</td>
+<td>日落大道</td>
+<td>Sunset Blvd.</td>
+<td>比利·怀德</td>
+<td>1950</td>
+</tr>
+<tr>
+<td>66</td>
+<td>控方证人</td>
+<td>Witness for the Prosecution</td>
+<td>比利·怀德</td>
+<td>1957</td>
+</tr>
+<tr>
+<td>67</td>
+<td>蜘蛛侠：平行宇宙</td>
+<td>Spider-Man: Into the Spider-Verse</td>
+<td>鲍勃·佩尔西凯蒂</td>
+<td>2018</td>
+</tr>
+<tr>
+<td>68</td>
+<td>幽灵公主</td>
+<td>Princess Mononoke</td>
+<td>宫崎骏</td>
+<td>1997</td>
+</tr>
+<tr>
+<td>69</td>
+<td>老男孩</td>
+<td>Oldboy</td>
+<td>朴赞郁</td>
+<td>2003</td>
+</tr>
+<tr>
+<td>70</td>
+<td>奇爱博士</td>
+<td>Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb</td>
+<td>斯坦利·库布里克</td>
+<td>1964</td>
+</tr>
+<tr>
+<td>71</td>
+<td>蝙蝠侠：黑暗骑士崛起</td>
+<td>The Dark Knight Rises</td>
+<td>克里斯托弗·诺兰</td>
+<td>2012</td>
+</tr>
+<tr>
+<td>72</td>
+<td>美国往事</td>
+<td>Once Upon a Time in America</td>
+<td>赛尔乔·莱昂内</td>
+<td>1984</td>
+</tr>
+<tr>
+<td>73</td>
+<td>异形2</td>
+<td>Aliens</td>
+<td>詹姆斯·卡梅隆</td>
+<td>1986</td>
+</tr>
+<tr>
+<td>74</td>
+<td>复仇者联盟4：终局之战</td>
+<td>Avengers: Endgame</td>
+<td>安东尼·罗素</td>
+<td>2019</td>
+</tr>
+<tr>
+<td>75</td>
+<td>你的名字。</td>
+<td>Your Name.</td>
+<td>新海诚</td>
+<td>2016</td>
+</tr>
+<tr>
+<td>76</td>
+<td>寻梦环游记</td>
+<td>Coco</td>
+<td>李·昂克里奇</td>
+<td>2017</td>
+</tr>
+<tr>
+<td>77</td>
+<td>美国丽人</td>
+<td>American Beauty</td>
+<td>萨姆·门德斯</td>
+<td>1999</td>
+</tr>
+<tr>
+<td>78</td>
+<td>勇敢的心</td>
+<td>Braveheart</td>
+<td>梅尔·吉布森</td>
+<td>1995</td>
+</tr>
+<tr>
+<td>79</td>
+<td>三傻大闹宝莱坞</td>
+<td>3 Idiots</td>
+<td>拉吉库马尔·希拉尼</td>
+<td>2009</td>
+</tr>
+<tr>
+<td>80</td>
+<td>从海底出击</td>
+<td>Das Boot</td>
+<td>沃尔夫冈·彼德森</td>
+<td>1981</td>
+</tr>
+<tr>
+<td>81</td>
+<td>玩具总动员4</td>
+<td>Toy Story</td>
+<td>乔什·库雷</td>
+<td>1995</td>
+</tr>
+<tr>
+<td>82</td>
+<td>天国与地狱</td>
+<td>High and Low</td>
+<td>黑泽明</td>
+<td>1963</td>
+</tr>
+<tr>
+<td>83</td>
+<td>莫扎特传</td>
+<td>Amadeus</td>
+<td>米洛斯·福尔曼</td>
+<td>1984</td>
+</tr>
+<tr>
+<td>84</td>
+<td>地球上的星星</td>
+<td>Taare Zameen Par</td>
+<td>阿米尔·汗</td>
+<td>2007</td>
+</tr>
+<tr>
+<td>85</td>
+<td>星球大战3：绝地归来</td>
+<td>Star Wars: Episode VI - Return of the Jedi</td>
+<td>理查德·马昆德</td>
+<td>1983</td>
+</tr>
+<tr>
+<td>86</td>
+<td>无耻混蛋</td>
+<td>Inglourious Basterds</td>
+<td>昆汀·塔伦蒂诺</td>
+<td>2009</td>
+</tr>
+<tr>
+<td>87</td>
+<td>何以为家</td>
+<td>Capharnaüm</td>
+<td>娜丁·拉巴基</td>
+<td>2018</td>
+</tr>
+<tr>
+<td>88</td>
+<td>落水狗</td>
+<td>Reservoir Dogs</td>
+<td>昆汀·塔伦蒂诺</td>
+<td>1992</td>
+</tr>
+<tr>
+<td>89</td>
+<td>心灵捕手</td>
+<td>Good Will Hunting</td>
+<td>格斯·范·桑特</td>
+<td>1997</td>
+</tr>
+<tr>
+<td>90</td>
+<td>2001太空漫游</td>
+<td>2001: A Space Odyssey</td>
+<td>斯坦利·库布里克</td>
+<td>1968</td>
+</tr>
+<tr>
+<td>91</td>
+<td>梦之安魂曲</td>
+<td>Requiem for a Dream</td>
+<td>达伦·阿伦诺夫斯基</td>
+<td>2000</td>
+</tr>
+<tr>
+<td>92</td>
+<td>迷魂记</td>
+<td>Vertigo</td>
+<td>阿尔弗雷德·希区柯克</td>
+<td>1958</td>
+</tr>
+<tr>
+<td>93</td>
+<td>特殊失踪专案组：失踪的黑色M</td>
+<td>M</td>
+<td>李胜英</td>
+<td>1931</td>
+</tr>
+<tr>
+<td>94</td>
+<td>摔跤吧！爸爸</td>
+<td>Dangal</td>
+<td>涅提·蒂瓦里</td>
+<td>2016</td>
+</tr>
+<tr>
+<td>95</td>
+<td>暖暖内含光</td>
+<td>Eternal Sunshine of the Spotless Mind</td>
+<td>米歇尔·贡德里</td>
+<td>2004</td>
+</tr>
+<tr>
+<td>96</td>
+<td>狩猎</td>
+<td>The Hunt</td>
+<td>托马斯·温特伯格</td>
+<td>2012</td>
+</tr>
+<tr>
+<td>97</td>
+<td>1917</td>
+<td>1917</td>
+<td>萨姆·门德斯</td>
+<td>2019</td>
+</tr>
+<tr>
+<td>98</td>
+<td>公民凯恩</td>
+<td>Citizen Kane</td>
+<td>奥逊·威尔斯</td>
+<td>1941</td>
+</tr>
+<tr>
+<td>99</td>
+<td>全金属外壳</td>
+<td>Full Metal Jacket</td>
+<td>斯坦利·库布里克</td>
+<td>1987</td>
+</tr>
+<tr>
+<td>100</td>
+<td>偷自行车的人</td>
+<td>Bicycle Thieves</td>
+<td>维托里奥·德西卡</td>
+<td>1948</td>
+</tr>
+<tr>
+<td>101</td>
+<td>寻子遇仙记</td>
+<td>The Kid</td>
+<td>查理·卓别林</td>
+<td>1921</td>
+</tr>
+<tr>
+<td>102</td>
+<td>发条橙</td>
+<td>A Clockwork Orange</td>
+<td>斯坦利·库布里克</td>
+<td>1971</td>
+</tr>
+<tr>
+<td>103</td>
+<td>西北偏北</td>
+<td>North by Northwest</td>
+<td>阿尔弗雷德·希区柯克</td>
+<td>1959</td>
+</tr>
+<tr>
+<td>104</td>
+<td>雨中曲</td>
+<td>Singin’ in the Rain</td>
+<td>斯坦利·多南</td>
+<td>1952</td>
+</tr>
+<tr>
+<td>105</td>
+<td>偷拐抢骗</td>
+<td>Snatch</td>
+<td>盖·里奇</td>
+<td>2000</td>
+</tr>
+<tr>
+<td>106</td>
+<td>疤面煞星</td>
+<td>Scarface</td>
+<td>布莱恩·德·帕尔玛</td>
+<td>1983</td>
+</tr>
+<tr>
+<td>107</td>
+<td>出租车司机</td>
+<td>Taxi Driver</td>
+<td>马丁·斯科塞斯</td>
+<td>1976</td>
+</tr>
+<tr>
+<td>108</td>
+<td>生之欲</td>
+<td>Ikiru</td>
+<td>黑泽明</td>
+<td>1952</td>
+</tr>
+<tr>
+<td>109</td>
+<td>阿拉伯的劳伦斯</td>
+<td>Lawrence of Arabia</td>
+<td>大卫·里恩</td>
+<td>1962</td>
+</tr>
+<tr>
+<td>110</td>
+<td>天使爱美丽</td>
+<td>Amélie</td>
+<td>让-皮埃尔·热内</td>
+<td>2001</td>
+</tr>
+<tr>
+<td>111</td>
+<td>玩具总动员3</td>
+<td>Toy Story 3</td>
+<td>李·昂克里奇</td>
+<td>2010</td>
+</tr>
+<tr>
+<td>112</td>
+<td>骗中骗</td>
+<td>The Sting</td>
+<td>乔治·罗伊·希尔</td>
+<td>1973</td>
+</tr>
+<tr>
+<td>113</td>
+<td>大都会</td>
+<td>Metropolis</td>
+<td>弗里茨·朗</td>
+<td>1927</td>
+</tr>
+<tr>
+<td>114</td>
+<td>一次别离</td>
+<td>A Separation</td>
+<td>阿斯哈·法哈蒂</td>
+<td>2011</td>
+</tr>
+<tr>
+<td>115</td>
+<td>黄昏双镖客</td>
+<td>For a Few Dollars More</td>
+<td>赛尔乔·莱昂内</td>
+<td>1965</td>
+</tr>
+<tr>
+<td>116</td>
+<td>焦土之城</td>
+<td>Incendies</td>
+<td>丹尼斯·维伦纽瓦</td>
+<td>2010</td>
+</tr>
+<tr>
+<td>117</td>
+<td>桃色公寓</td>
+<td>The Apartment</td>
+<td>比利·怀德</td>
+<td>1960</td>
+</tr>
+<tr>
+<td>118</td>
+<td>双重赔偿</td>
+<td>Double Indemnity</td>
+<td>比利·怀德</td>
+<td>1944</td>
+</tr>
+<tr>
+<td>119</td>
+<td>自己去看</td>
+<td>Come and See</td>
+<td>依莱姆·克里莫夫</td>
+<td>1985</td>
+</tr>
+<tr>
+<td>120</td>
+<td>杀死一只知更鸟</td>
+<td>To Kill a Mockingbird</td>
+<td>罗伯特·马利根</td>
+<td>1962</td>
+</tr>
+<tr>
+<td>121</td>
+<td>夺宝奇兵3</td>
+<td>Indiana Jones and the Last Crusade</td>
+<td>史蒂文·斯皮尔伯格</td>
+<td>1989</td>
+</tr>
+<tr>
+<td>122</td>
+<td>飞屋环游记</td>
+<td>Up</td>
+<td>彼特·道格特</td>
+<td>2009</td>
+</tr>
+<tr>
+<td>123</td>
+<td>洛城机密</td>
+<td>L.A. Confidential</td>
+<td>柯蒂斯·汉森</td>
+<td>1997</td>
+</tr>
+<tr>
+<td>124</td>
+<td>盗火线</td>
+<td>Heat</td>
+<td>迈克尔·曼</td>
+<td>1995</td>
+</tr>
+<tr>
+<td>125</td>
+<td>巨蟒与圣杯</td>
+<td>Monty Python and the Holy Grail</td>
+<td>特瑞·吉列姆</td>
+<td>1975</td>
+</tr>
+<tr>
+<td>126</td>
+<td>虎胆龙威</td>
+<td>Die Hard</td>
+<td>约翰·麦克蒂尔南</td>
+<td>1988</td>
+</tr>
+<tr>
+<td>127</td>
+<td>罗生门</td>
+<td>Rashômon</td>
+<td>黑泽明</td>
+<td>1950</td>
+</tr>
+<tr>
+<td>128</td>
+<td>用心棒</td>
+<td>Yojimbo</td>
+<td>黑泽明</td>
+<td>1961</td>
+</tr>
+<tr>
+<td>129</td>
+<td>蝙蝠侠：侠影之谜</td>
+<td>Batman Begins</td>
+<td>克里斯托弗·诺兰</td>
+<td>2005</td>
+</tr>
+<tr>
+<td>130</td>
+<td>绿皮书</td>
+<td>Green Book</td>
+<td>彼得·法雷里</td>
+<td>2018</td>
+</tr>
+<tr>
+<td>131</td>
+<td>帝国的毁灭</td>
+<td>Downfall</td>
+<td>奥利弗·希施比格尔</td>
+<td>2004</td>
+</tr>
+<tr>
+<td>132</td>
+<td>小鞋子</td>
+<td>Children of Heaven</td>
+<td>马基德·马基迪</td>
+<td>1997</td>
+</tr>
+<tr>
+<td>133</td>
+<td>不可饶恕</td>
+<td>Unforgiven</td>
+<td>克林特·伊斯特伍德</td>
+<td>1992</td>
+</tr>
+<tr>
+<td>134</td>
+<td>情圣</td>
+<td>Some Like It Hot</td>
+<td>宋晓飞</td>
+<td>1959</td>
+</tr>
+<tr>
+<td>135</td>
+<td>乱</td>
+<td>Ran</td>
+<td>黑泽明</td>
+<td>1985</td>
+</tr>
+<tr>
+<td>136</td>
+<td>快乐的阿南</td>
+<td>Anand</td>
+<td>西里斯科什·慕克吉</td>
+<td>1971</td>
+</tr>
+<tr>
+<td>137</td>
+<td>哈尔的移动城堡</td>
+<td>Howl’s Moving Castle</td>
+<td>宫崎骏</td>
+<td>2004</td>
+</tr>
+<tr>
+<td>138</td>
+<td>美丽心灵</td>
+<td>A Beautiful Mind</td>
+<td>朗·霍华德</td>
+<td>2001</td>
+</tr>
+<tr>
+<td>139</td>
+<td>彗星美人</td>
+<td>All About Eve</td>
+<td>约瑟夫·L·曼凯维奇</td>
+<td>1950</td>
+</tr>
+<tr>
+<td>140</td>
+<td>大逃亡</td>
+<td>The Great Escape</td>
+<td>约翰·斯特奇斯</td>
+<td>1963</td>
+</tr>
+<tr>
+<td>141</td>
+<td>赌城风云</td>
+<td>Casino</td>
+<td>马丁·斯科塞斯</td>
+<td>1995</td>
+</tr>
+<tr>
+<td>142</td>
+<td>潘神的迷宫</td>
+<td>Pan’s Labyrinth</td>
+<td>吉尔莫·德尔·托罗</td>
+<td>2006</td>
+</tr>
+<tr>
+<td>143</td>
+<td>华尔街之狼</td>
+<td>The Wolf of Wall Street</td>
+<td>马丁·斯科塞斯</td>
+<td>2013</td>
+</tr>
+<tr>
+<td>144</td>
+<td>谜一样的双眼</td>
+<td>The Secret in Their Eyes</td>
+<td>胡安·何塞·坎帕内利亚</td>
+<td>2009</td>
+</tr>
+<tr>
+<td>145</td>
+<td>两杆大烟枪</td>
+<td>Lock, Stock and Two Smoking Barrels</td>
+<td>盖·里奇</td>
+<td>1998</td>
+</tr>
+<tr>
+<td>146</td>
+<td>愤怒的公牛</td>
+<td>Raging Bull</td>
+<td>马丁·斯科塞斯</td>
+<td>1980</td>
+</tr>
+<tr>
+<td>147</td>
+<td>龙猫</td>
+<td>My Neighbor Totoro</td>
+<td>宫崎骏</td>
+<td>1988</td>
+</tr>
+<tr>
+<td>148</td>
+<td>血色将至</td>
+<td>There Will Be Blood</td>
+<td>保罗·托马斯·安德森</td>
+<td>2007</td>
+</tr>
+<tr>
+<td>149</td>
+<td>纽伦堡的审判</td>
+<td>Judgment at Nuremberg</td>
+<td>斯坦利·克雷默</td>
+<td>1961</td>
+</tr>
+<tr>
+<td>150</td>
+<td>碧血金沙</td>
+<td>The Treasure of the Sierra Madre</td>
+<td>约翰·休斯顿</td>
+<td>1948</td>
+</tr>
+<tr>
+<td>151</td>
+<td>三块广告牌</td>
+<td>Three Billboards Outside Ebbing, Missouri</td>
+<td>马丁·麦克唐纳</td>
+<td>2017</td>
+</tr>
+<tr>
+<td>152</td>
+<td>电话谋杀案</td>
+<td>Dial M for Murder</td>
+<td>阿尔弗雷德·希区柯克</td>
+<td>1954</td>
+</tr>
+<tr>
+<td>153</td>
+<td>我的父亲，我的儿子</td>
+<td>Babam ve Oglum</td>
+<td>查恩·厄尔马克</td>
+<td>2005</td>
+</tr>
+<tr>
+<td>154</td>
+<td>唐人街</td>
+<td>Chinatown</td>
+<td>罗曼·波兰斯基</td>
+<td>1974</td>
+</tr>
+<tr>
+<td>155</td>
+<td>淘金记</td>
+<td>The Gold Rush</td>
+<td>查理·卓别林</td>
+<td>1925</td>
+</tr>
+<tr>
+<td>156</td>
+<td>禁闭岛</td>
+<td>Shutter Island</td>
+<td>马丁·斯科塞斯</td>
+<td>2010</td>
+</tr>
+<tr>
+<td>157</td>
+<td>老无所依</td>
+<td>No Country for Old Men</td>
+<td>伊桑·科恩</td>
+<td>2007</td>
+</tr>
+<tr>
+<td>158</td>
+<td>V字仇杀队</td>
+<td>V for Vendetta</td>
+<td>詹姆斯·麦克提格</td>
+<td>2005</td>
+</tr>
+<tr>
+<td>159</td>
+<td>第七封印</td>
+<td>The Seventh Seal</td>
+<td>英格玛·伯格曼</td>
+<td>1957</td>
+</tr>
+<tr>
+<td>160</td>
+<td>头脑特工队</td>
+<td>Inside Out</td>
+<td>彼特·道格特</td>
+<td>2015</td>
+</tr>
+<tr>
+<td>161</td>
+<td>勇士</td>
+<td>Warrior</td>
+<td>加文·欧康诺</td>
+<td>2011</td>
+</tr>
+<tr>
+<td>162</td>
+<td>象人</td>
+<td>The Elephant Man</td>
+<td>大卫·林奇</td>
+<td>1980</td>
+</tr>
+<tr>
+<td>163</td>
+<td>猜火车</td>
+<td>Trainspotting</td>
+<td>丹尼·博伊尔</td>
+<td>1996</td>
+</tr>
+<tr>
+<td>164</td>
+<td>第六感</td>
+<td>The Sixth Sense</td>
+<td>M·奈特·沙马兰</td>
+<td>1999</td>
+</tr>
+<tr>
+<td>165</td>
+<td>怪形</td>
+<td>The Thing</td>
+<td>约翰·卡朋特</td>
+<td>1982</td>
+</tr>
+<tr>
+<td>166</td>
+<td>侏罗纪公园</td>
+<td>Jurassic Park</td>
+<td>史蒂文·斯皮尔伯格</td>
+<td>1993</td>
+</tr>
+<tr>
+<td>167</td>
+<td>乱世佳人</td>
+<td>Gone with the Wind</td>
+<td>维克多·弗莱明</td>
+<td>1939</td>
+</tr>
+<tr>
+<td>168</td>
+<td>楚门的世界</td>
+<td>The Truman Show</td>
+<td>彼得·威尔</td>
+<td>1998</td>
+</tr>
+<tr>
+<td>169</td>
+<td>野草莓</td>
+<td>Wild Strawberries</td>
+<td>英格玛·伯格曼</td>
+<td>1957</td>
+</tr>
+<tr>
+<td>170</td>
+<td>海底总动员</td>
+<td>Finding Nemo</td>
+<td>安德鲁·斯坦顿</td>
+<td>2003</td>
+</tr>
+<tr>
+<td>171</td>
+<td>银翼杀手</td>
+<td>Blade Runner</td>
+<td>雷德利·斯科特</td>
+<td>1982</td>
+</tr>
+<tr>
+<td>172</td>
+<td>房间</td>
+<td>Room</td>
+<td>伦尼·阿伯拉罕森</td>
+<td>2015</td>
+</tr>
+<tr>
+<td>173</td>
+<td>潜行者</td>
+<td>Stalker</td>
+<td>安德烈·塔可夫斯基</td>
+<td>1979</td>
+</tr>
+<tr>
+<td>174</td>
+<td>桂河大桥</td>
+<td>The Bridge on the River Kwai</td>
+<td>威廉·霍尔登</td>
+<td>1957</td>
+</tr>
+<tr>
+<td>175</td>
+<td>杀死比尔</td>
+<td>Kill Bill: Vol. 1</td>
+<td>昆汀·塔伦蒂诺</td>
+<td>2003</td>
+</tr>
+<tr>
+<td>176</td>
+<td>冰血暴</td>
+<td>Fargo</td>
+<td>乔尔·科恩</td>
+<td>1996</td>
+</tr>
+<tr>
+<td>177</td>
+<td>杀人回忆</td>
+<td>Memories of Murder</td>
+<td>奉俊昊</td>
+<td>2003</td>
+</tr>
+<tr>
+<td>178</td>
+<td>东京物语</td>
+<td>Tokyo Story</td>
+<td>小津安二郎</td>
+<td>1953</td>
+</tr>
+<tr>
+<td>179</td>
+<td>第三人</td>
+<td>The Third Man</td>
+<td>卡罗尔·里德</td>
+<td>1949</td>
+</tr>
+<tr>
+<td>180</td>
+<td>码头风云</td>
+<td>On the Waterfront</td>
+<td>伊利亚·卡赞</td>
+<td>1954</td>
+</tr>
+<tr>
+<td>181</td>
+<td>老爷车</td>
+<td>Gran Torino</td>
+<td>克林特·伊斯特伍德</td>
+<td>2008</td>
+</tr>
+<tr>
+<td>182</td>
+<td>猎鹿人</td>
+<td>The Deer Hunter</td>
+<td>迈克尔·西米诺</td>
+<td>1978</td>
+</tr>
+<tr>
+<td>183</td>
+<td>荒蛮故事</td>
+<td>Wild Tales</td>
+<td>达米安·斯兹弗隆</td>
+<td>2014</td>
+</tr>
+<tr>
+<td>184</td>
+<td>克劳斯：圣诞节的秘密</td>
+<td>Klaus</td>
+<td>塞尔希奥·巴勃罗斯</td>
+<td>2019</td>
+</tr>
+<tr>
+<td>185</td>
+<td>因父之名</td>
+<td>In the Name of the Father</td>
+<td>吉姆·谢里丹</td>
+<td>1993</td>
+</tr>
+<tr>
+<td>186</td>
+<td>玛丽和马克思</td>
+<td>Mary and Max</td>
+<td>亚当·艾略特</td>
+<td>2009</td>
+</tr>
+<tr>
+<td>187</td>
+<td>调音师</td>
+<td>Andhadhun</td>
+<td>斯里兰姆·拉格万</td>
+<td>2018</td>
+</tr>
+<tr>
+<td>188</td>
+<td>消失的爱人</td>
+<td>Gone Girl</td>
+<td>大卫·芬奇</td>
+<td>2014</td>
+</tr>
+<tr>
+<td>189</td>
+<td>布达佩斯大饭店</td>
+<td>The Grand Budapest Hotel</td>
+<td>韦斯·安德森</td>
+<td>2014</td>
+</tr>
+<tr>
+<td>190</td>
+<td>血战钢锯岭</td>
+<td>Hacksaw Ridge</td>
+<td>梅尔·吉布森</td>
+<td>2016</td>
+</tr>
+<tr>
+<td>191</td>
+<td>爱在黎明破晓前</td>
+<td>Before Sunrise</td>
+<td>理查德·林克莱特</td>
+<td>1995</td>
+</tr>
+<tr>
+<td>192</td>
+<td>谋杀绿脚趾</td>
+<td>The Big Lebowski</td>
+<td>乔尔·科恩</td>
+<td>1998</td>
+</tr>
+<tr>
+<td>193</td>
+<td>猫鼠游戏</td>
+<td>Catch Me If You Can</td>
+<td>史蒂文·斯皮尔伯格</td>
+<td>2002</td>
+</tr>
+<tr>
+<td>194</td>
+<td>假面</td>
+<td>Persona</td>
+<td>英格玛·伯格曼</td>
+<td>1966</td>
+</tr>
+<tr>
+<td>195</td>
+<td>强盗</td>
+<td>The Bandit</td>
+<td>亚武兹·图尔古尔</td>
+<td>1996</td>
+</tr>
+<tr>
+<td>196</td>
+<td>你逃我也逃</td>
+<td>To Be or Not to Be</td>
+<td>恩斯特·刘别谦</td>
+<td>1942</td>
+</tr>
+<tr>
+<td>197</td>
+<td>极速车王</td>
+<td>Ford v Ferrari</td>
+<td>詹姆斯·曼高德</td>
+<td>2019</td>
+</tr>
+<tr>
+<td>198</td>
+<td>囚徒</td>
+<td>Prisoners</td>
+<td>丹尼斯·维伦纽瓦</td>
+<td>2013</td>
+</tr>
+<tr>
+<td>199</td>
+<td>福尔摩斯二世</td>
+<td>Sherlock Jr.</td>
+<td>巴斯特·基顿</td>
+<td>1924</td>
+</tr>
+<tr>
+<td>200</td>
+<td>将军号</td>
+<td>The General</td>
+<td>巴斯特·基顿</td>
+<td>1926</td>
+</tr>
+<tr>
+<td>201</td>
+<td>驯龙高手3</td>
+<td>How to Train Your Dragon</td>
+<td>迪恩·德布洛斯</td>
+<td>2010</td>
+</tr>
+<tr>
+<td>202</td>
+<td>史密斯先生到华盛顿</td>
+<td>Mr. Smith Goes to Washington</td>
+<td>弗兰克·卡普拉</td>
+<td>1939</td>
+</tr>
+<tr>
+<td>203</td>
+<td>为奴十二年</td>
+<td>12 Years a Slave</td>
+<td>史蒂夫·麦奎因</td>
+<td>2013</td>
+</tr>
+<tr>
+<td>204</td>
+<td>巴里·林登</td>
+<td>Barry Lyndon</td>
+<td>斯坦利·库布里克</td>
+<td>1975</td>
+</tr>
+<tr>
+<td>205</td>
+<td>疯狂的麦克斯4：狂暴之路</td>
+<td>Mad Max: Fury Road</td>
+<td>乔治·米勒</td>
+<td>2015</td>
+</tr>
+<tr>
+<td>206</td>
+<td>电视台风云</td>
+<td>Network</td>
+<td>西德尼·吕美特</td>
+<td>1976</td>
+</tr>
+<tr>
+<td>207</td>
+<td>哆啦A梦：伴我同行</td>
+<td>Stand by Me</td>
+<td>八木龙一</td>
+<td>1986</td>
+</tr>
+<tr>
+<td>208</td>
+<td>百万美元宝贝</td>
+<td>Million Dollar Baby</td>
+<td>克林特·伊斯特伍德</td>
+<td>2004</td>
+</tr>
+<tr>
+<td>209</td>
+<td>铁窗喋血</td>
+<td>Cool Hand Luke</td>
+<td>斯图尔特·罗森博格</td>
+<td>1967</td>
+</tr>
+<tr>
+<td>210</td>
+<td>死亡诗社</td>
+<td>Dead Poets Society</td>
+<td>彼得·威尔</td>
+<td>1989</td>
+</tr>
+<tr>
+<td>211</td>
+<td>忠犬八公的故事</td>
+<td>Hachi: A Dog’s Tale</td>
+<td>拉斯·霍尔斯道姆</td>
+<td>2009</td>
+</tr>
+<tr>
+<td>212</td>
+<td>宾虚</td>
+<td>Ben-Hur</td>
+<td>威廉·惠勒</td>
+<td>1959</td>
+</tr>
+<tr>
+<td>213</td>
+<td>荒野生存</td>
+<td>Into the Wild</td>
+<td>西恩·潘</td>
+<td>2007</td>
+</tr>
+<tr>
+<td>214</td>
+<td>哈利·波特与死亡圣器(下)</td>
+<td>Harry Potter and the Deathly Hallows: Part 2</td>
+<td>大卫·叶茨</td>
+<td>2011</td>
+</tr>
+<tr>
+<td>215</td>
+<td>野战排</td>
+<td>Platoon</td>
+<td>奥利佛·斯通</td>
+<td>1986</td>
+</tr>
+<tr>
+<td>216</td>
+<td>金刚狼3：殊死一战</td>
+<td>Logan</td>
+<td>詹姆斯·曼高德</td>
+<td>2017</td>
+</tr>
+<tr>
+<td>217</td>
+<td>恐惧的代价</td>
+<td>The Wages of Fear</td>
+<td>亨利-乔治·克鲁佐</td>
+<td>1953</td>
+</tr>
+<tr>
+<td>218</td>
+<td>万世魔星</td>
+<td>Monty Python’s Life of Brian</td>
+<td>特瑞·琼斯</td>
+<td>1979</td>
+</tr>
+<tr>
+<td>219</td>
+<td>极速风流</td>
+<td>Rush</td>
+<td>朗·霍华德</td>
+<td>2013</td>
+</tr>
+<tr>
+<td>220</td>
+<td>小姐</td>
+<td>The Handmaiden</td>
+<td>朴赞郁</td>
+<td>2016</td>
+</tr>
+<tr>
+<td>221</td>
+<td>圣女贞德蒙难记</td>
+<td>The Passion of Joan of Arc</td>
+<td>卡尔·西奥多·德莱叶</td>
+<td>1928</td>
+</tr>
+<tr>
+<td>222</td>
+<td>四百击</td>
+<td>The 400 Blows</td>
+<td>弗朗索瓦·特吕弗</td>
+<td>1959</td>
+</tr>
+<tr>
+<td>223</td>
+<td>安德烈·卢布廖夫</td>
+<td>Andrei Rublev</td>
+<td>安德烈·塔可夫斯基</td>
+<td>1966</td>
+</tr>
+<tr>
+<td>224</td>
+<td>卢旺达饭店</td>
+<td>Hotel Rwanda</td>
+<td>特瑞·乔治</td>
+<td>2004</td>
+</tr>
+<tr>
+<td>225</td>
+<td>男人的争斗</td>
+<td>Rififi</td>
+<td>朱尔斯·达辛</td>
+<td>1955</td>
+</tr>
+<tr>
+<td>226</td>
+<td>聚焦</td>
+<td>Spotlight</td>
+<td>汤姆·麦卡锡</td>
+<td>2015</td>
+</tr>
+<tr>
+<td>227</td>
+<td>爱情是狗娘</td>
+<td>Amores Perros</td>
+<td>亚历杭德罗·冈萨雷斯·伊纳里图</td>
+<td>2000</td>
+</tr>
+<tr>
+<td>228</td>
+<td>怒火青春</td>
+<td>La Haine</td>
+<td>马修·卡索维茨</td>
+<td>1995</td>
+</tr>
+<tr>
+<td>229</td>
+<td>风之谷</td>
+<td>Nausicaä of the Valley of the Wind</td>
+<td>宫崎骏</td>
+<td>1984</td>
+</tr>
+<tr>
+<td>230</td>
+<td>洛奇</td>
+<td>Rocky</td>
+<td>约翰·G·艾维尔森</td>
+<td>1976</td>
+</tr>
+<tr>
+<td>231</td>
+<td>芭萨提的颜色</td>
+<td>Rang De Basanti</td>
+<td>拉凯什·奥姆普拉卡西·梅赫拉</td>
+<td>2006</td>
+</tr>
+<tr>
+<td>232</td>
+<td>瓦塞浦黑帮(上)</td>
+<td>Gangs of Wasseypur</td>
+<td>阿努拉格·卡施亚普</td>
+<td>2012</td>
+</tr>
+<tr>
+<td>233</td>
+<td>怪兽电力公司</td>
+<td>Monsters, Inc.</td>
+<td>彼特·道格特</td>
+<td>2001</td>
+</tr>
+<tr>
+<td>234</td>
+<td>蝴蝶梦</td>
+<td>Rebecca</td>
+<td>阿尔弗雷德·希区柯克</td>
+<td>1940</td>
+</tr>
+<tr>
+<td>235</td>
+<td>燃烧女子的肖像</td>
+<td>Portrait of a Lady on Fire</td>
+<td>瑟琳·席安玛</td>
+<td>2019</td>
+</tr>
+<tr>
+<td>236</td>
+<td>爱在日落黄昏时</td>
+<td>Before Sunset</td>
+<td>理查德·林克莱特</td>
+<td>2004</td>
+</tr>
+<tr>
+<td>237</td>
+<td>花样年华</td>
+<td>In the Mood for Love</td>
+<td>王家卫</td>
+<td>2000</td>
+</tr>
+<tr>
+<td>238</td>
+<td>一夜风流</td>
+<td>It Happened One Night</td>
+<td>弗兰克·卡普拉</td>
+<td>1934</td>
+</tr>
+<tr>
+<td>239</td>
+<td>德州巴黎</td>
+<td>Paris, Texas</td>
+<td>维姆·文德斯</td>
+<td>1984</td>
+</tr>
+<tr>
+<td>240</td>
+<td>误杀瞒天记</td>
+<td>Drishyam</td>
+<td>尼西卡特·卡马特</td>
+<td>2015</td>
+</tr>
+<tr>
+<td>241</td>
+<td>马戏团</td>
+<td>The Circus</td>
+<td>查理·卓别林</td>
+<td>1928</td>
+</tr>
+<tr>
+<td>242</td>
+<td>看不见的客人</td>
+<td>The Invisible Guest</td>
+<td>奥里奥尔·保罗</td>
+<td>2016</td>
+</tr>
+<tr>
+<td>243</td>
+<td>相助</td>
+<td>The Help</td>
+<td>泰特·泰勒</td>
+<td>2011</td>
+</tr>
+<tr>
+<td>244</td>
+<td>公主新娘</td>
+<td>The Princess Bride</td>
+<td>罗伯·莱纳</td>
+<td>1987</td>
+</tr>
+<tr>
+<td>245</td>
+<td>阿尔及尔之战</td>
+<td>The Battle of Algiers</td>
+<td>吉洛·彭泰科沃</td>
+<td>1966</td>
+</tr>
+<tr>
+<td>246</td>
+<td>终结者</td>
+<td>The Terminator</td>
+<td>詹姆斯·卡梅隆</td>
+<td>1984</td>
+</tr>
+<tr>
+<td>247</td>
+<td>金橘</td>
+<td>Tangerines</td>
+<td>萨萨·乌鲁沙泽</td>
+<td>2013</td>
+</tr>
+<tr>
+<td>248</td>
+<td>阿拉丁</td>
+<td>Aladdin</td>
+<td>盖·里奇</td>
+<td>1992</td>
+</tr>
+<tr>
+<td>249</td>
+<td>声之形</td>
+<td>A Silent Voice: The Movie</td>
+<td>山田尚子</td>
+<td>2016</td>
+</tr>
+<tr>
+<td>250</td>
+<td>蓝白红三部曲之红</td>
+<td>Three Colors: Red</td>
+<td>克日什托夫·基耶斯洛夫斯基</td>
+<td>1994</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2019/10/25/how_to_impl_bubble_sort/" rel="next" title="【前端】可视化之冒泡排序">
+      【前端】可视化之冒泡排序 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="xiaoyu"
+      src="https://s1.vika.cn/space/2021/01/22/cb972124b3ca4f2daebd9a963d8bbc8a?attname=crop_20210121143805.jpg">
+  <p class="site-author-name" itemprop="name">xiaoyu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/doctoroyy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;doctoroyy" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:doctor.oyy@gmail.com" title="E-Mail → mailto:doctor.oyy@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xiaoyu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
