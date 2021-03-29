@@ -29,7 +29,7 @@ jobs:
     - name: Push changes
       uses: peaceiris/actions-gh-pages@v3
       env:
-        deploy+key: ${{ secrets.GITHUB_TOKEN }}
+        deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
         public_dir: ./public
         cname: blog.doctoroyy.net
       with:
