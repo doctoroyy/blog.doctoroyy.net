@@ -25,9 +25,9 @@ jobs:
       # uses: CultureHQ/actions-yarn@661c6f3a66041c2432bcfb78096b9207304614c8
       uses: CultureHQ/actions-yarn@v1.0.1
     - name: Generate
-      run: |
-        yarn && yarn g
-        echo blog.doctoroyy.net >> CNAME
+      run: yarn && yarn g
+    - name: Create CNAME
+      run: echo blog.doctoroyy.net ./public/CNAME
     - name: Push changes
       uses: peaceiris/actions-gh-pages@v2
       env:
