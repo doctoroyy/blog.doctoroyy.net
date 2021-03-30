@@ -193,7 +193,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-30 22:26:45" itemprop="dateModified" datetime="2021-03-30T22:26:45+08:00">2021-03-30</time>
+                <time title="修改时间：2021-03-30 22:31:31" itemprop="dateModified" datetime="2021-03-30T22:31:31+08:00">2021-03-30</time>
               </span>
 
           
@@ -252,7 +252,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-03-30 22:23:50 / 修改时间：22:26:45" itemprop="dateCreated datePublished" datetime="2021-03-30T22:23:50+08:00">2021-03-30</time>
+              <time title="创建时间：2021-03-30 22:23:50 / 修改时间：22:31:31" itemprop="dateCreated datePublished" datetime="2021-03-30T22:23:50+08:00">2021-03-30</time>
             </span>
 
           
@@ -268,68 +268,14 @@
       
           <h1 id="关于-web-视频播放"><a href="#关于-web-视频播放" class="headerlink" title="关于 web 视频播放"></a>关于 web 视频播放</h1><h3 id="1-视频的格式、编码"><a href="#1-视频的格式、编码" class="headerlink" title="1. 视频的格式、编码"></a>1. 视频的格式、编码</h3><p>格式：视频格式也叫视频的封装格式，通俗地讲，视频格式就是一种规范，定义了在什么地方（位置）放什么内容。常见的格式有 mkv，mp4，mov，flv。</p>
 <p>编码：视频是 音频 + 图像 的集合，所以视频编码实际上要分成音频编码和图像编码。编码方式实际上描述的就是数据的压缩方式。常见的编码有 h264 、vp8、vp9，以及还没普及的 h265</p>
-<h3 id="2-浏览器如何解析一个视频？"><a href="#2-浏览器如何解析一个视频？" class="headerlink" title="2. 浏览器如何解析一个视频？"></a>2. 浏览器如何解析一个视频？</h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/73772711">花椒前端基于WebAssembly 的H.265播放器研发</a></p>
-<ol>
-<li>video 标签创建一个 DOM 对象，实例化一个 WebMediaPlayer</li>
-<li>player 驱使 Buffer 请求多媒体数据</li>
-<li>FFmpeg 进行解封装和音视频解码</li>
-<li>把解码后的数据传给相应的渲染器对象进行渲染绘制</li>
-<li>video 标签显示或声卡播放</li>
-</ol>
-<p><img data-src="https://s1.vika.cn/space/2021/03/30/589444a9095540d2942791f679ef13fd?attname=image.png" alt="%E5%85%B3%E4%BA%8E%20web%20%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%20d9b5d2946e3f444b82a369e48f57a400/Untitled.png"></p>
-<h3 id="3-浏览器对各种格式、编码的支持度"><a href="#3-浏览器对各种格式、编码的支持度" class="headerlink" title="3. 浏览器对各种格式、编码的支持度"></a>3. 浏览器对各种格式、编码的支持度</h3><p><a target="_blank" rel="noopener" href="https://www.encoding.com/html5-video-codec/">HTML5 Video Converter | Encoding.com</a></p>
-<p><img data-src="https://s1.vika.cn/space/2021/03/30/1bc1a37b368149d2990989a96a913dea" alt="%E5%85%B3%E4%BA%8E%20web%20%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%20d9b5d2946e3f444b82a369e48f57a400/Untitled%201.png"></p>
-<p><img data-src="https://s1.vika.cn/space/2021/03/30/d364060af66144e297b8ad7541a68ed4" alt="%E5%85%B3%E4%BA%8E%20web%20%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%20d9b5d2946e3f444b82a369e48f57a400/Untitled%202.png"></p>
-<p>在实际测试过程中，mkv 格式、h264 编码的视频在 Mac  Chrome 器中也可以播放，但在 Mac PC Safari 中不能播放</p>
-<h3 id="4-我们如何准确知道一个视频能不能正常播放？"><a href="#4-我们如何准确知道一个视频能不能正常播放？" class="headerlink" title="4. 我们如何准确知道一个视频能不能正常播放？"></a>4. 我们如何准确知道一个视频能不能正常播放？</h3><p>先说结论：我们并不能精确知道视频能否播放。</p>
-<p>现代浏览器提供了两个 API 用来检测浏览器对视频的支持度。</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/MediaSource/isTypeSupported">window.MediaSource.isTypeSupported</a>, 这个方法支持传入一个包含视频 mimeType 和 codecs 的字符串，返回一个布尔值。</li>
-</ul>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mimeCodec = <span class="string">&#x27;video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="string">&#x27;MediaSource&#x27;</span> <span class="keyword">in</span> <span class="built_in">window</span> &amp;&amp; MediaSource.isTypeSupported(mimeCodec)) &#123;</span><br><span class="line">  <span class="keyword">var</span> mediaSource = <span class="keyword">new</span> MediaSource;</span><br><span class="line">  <span class="comment">//console.log(mediaSource.readyState); // closed</span></span><br><span class="line">  video.src = URL.createObjectURL(mediaSource);</span><br><span class="line">  mediaSource.addEventListener(<span class="string">&#x27;sourceopen&#x27;</span>, sourceOpen);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.error(<span class="string">&#x27;Unsupported MIME type or codec: &#x27;</span>, mimeCodec);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/canPlayType">video.canPlayType</a>, 这个方法接受参数与上一个函数一致, 返回一个不精确的字符串描述</li>
-</ul>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">type CanPlayTypeResult = <span class="string">&quot;&quot;</span> | <span class="string">&quot;maybe&quot;</span> | <span class="string">&quot;probably&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 检测您的浏览器是否能播放不同类型的视频</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param </span>type 可播放类型，&#x27;video/mp4; codecs=&quot;avc1.64001E, mp4a.40.5&quot;&#x27;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">public canPlayType(type: string): CanPlayTypeResult;</span><br></pre></td></tr></table></figure>
-
-<p>接下来做一个简单的实验：</p>
-<p>样品: </p>
-<ol>
-<li>一个 mp4 格式、mpeg4 编码的视频 <a target="_blank" rel="noopener" href="https://s1.vika.cn/space/2020/10/21/95ac31d26f4048a9b7d087106670a0f9?attname=1602656111421.mp4">1602656111421.mp4</a> (video/mp4;codecs=”mpeg4,aac”)</li>
-<li>macOS 10.14.6</li>
-<li>Chrome 89.0.4389.90</li>
-</ol>
-<p>在播放前用这 2 个函数检测, 打印结果</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;avinfo: &#x27;</span>, avinfo);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;isTypeSupported: &#x27;</span>, <span class="built_in">window</span>.MediaSource.isTypeSupported(avinfo));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;canplayType: &#x27;</span>, <span class="built_in">document</span>.createElement(<span class="string">&#x27;video&#x27;</span>).canPlayType(avinfo));</span><br></pre></td></tr></table></figure>
-
-<p>结果如下：</p>
-<p><img data-src="https://s1.vika.cn/space/2021/03/30/d046027ce0b7441a9956e822540dc08d" alt="%E5%85%B3%E4%BA%8E%20web%20%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%20d9b5d2946e3f444b82a369e48f57a400/Untitled%203.png"></p>
-<p>结果表明，当前视频不支持，也确实不能正常播放。</p>
-<p>于是我做了第二次实验：</p>
-<p>一个 mp4 格式、h264编码的视频 <a target="_blank" rel="noopener" href="https://s1.vika.cn/space/2021/03/20/068375b3c98b455586258898e7be0aa8?attname=bandicam%202021-01-28%2011-12-47-568.mp4">bandicam 2021-01-28 11-12-47-568.mp4</a> (video/mp4;codecs=”h264,aac”)</p>
-<p><img data-src="https://s1.vika.cn/space/2021/03/30/5a56cd6d28684b83ba4b977675dfc213" alt="%E5%85%B3%E4%BA%8E%20web%20%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%20d9b5d2946e3f444b82a369e48f57a400/Untitled%204.png"></p>
-<p>这次打印的结果表明依然是不支持，然而事实确是：<strong>可以正常播放</strong>？？？！！！</p>
-<p>对于完全不能播放（视频和音频）的情况，算是一种异常，开发者可以明确知道；</p>
-<p>但是对<strong>音频</strong>或者<strong>视频</strong>二者之一不能播放的情况，只有依靠这两个函数来处理了，但根据上面的测试结果，这 2 个函数的检测实际上是不准确的，所以如果想要在视频播放异常加提示这件事情就变得困难</p>
-<p>基于上述这个浏览器自身检测 API 不可信任的结论，我们似乎只能在用户侧维护一套浏览器普遍支持的视频 格式/编码 集合，如果不在这个集合里面就弹出类似这种提示，想要准确在合适的时机弹出，暂时没有找到比较完美的解决方案</p>
-<p><img data-src="https://s1.vika.cn/space/2021/03/30/f0caf28d84c9430bb7db4714a771185b" alt="%E5%85%B3%E4%BA%8E%20web%20%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%20d9b5d2946e3f444b82a369e48f57a400/Untitled%205.png"></p>
-<h3 id="5-扩展浏览器播放能力：如何在-web-端播放浏览器不支持的视频？"><a href="#5-扩展浏览器播放能力：如何在-web-端播放浏览器不支持的视频？" class="headerlink" title="5. 扩展浏览器播放能力：如何在 web 端播放浏览器不支持的视频？"></a>5. 扩展浏览器播放能力：如何在 web 端播放浏览器不支持的视频？</h3><p>目前主要有 2 个方案：</p>
-<ol>
-<li><p>web 端转码（本地调用类似 FFmpeg、libde265 的 .wasm 版本解码）</p>
-<p> 淘宝前端做过类似的事情，但在实践中存在视频帧数不稳定、视频播放进度调整出现 bug 的问题，总的来说，截止到这篇文章发表的时候，该方案基本还处于小规模试验阶段（这篇文章提到一点是现代浏览器不能支持众多视频编码可能不是技术问题，而是有些编码解码器使用是要收费的）</p>
-<p> <a target="_blank" rel="noopener" href="https://fed.taobao.org/blog/taofed/do71ct/web-player-h265/">Taobao FED | 淘系前端团队</a></p>
-<p> 花椒直播开发过一个 h265 播放器，但尚未开源，不过在文章评论页下找到一个开源项目：</p>
-<p> <a target="_blank" rel="noopener" href="https://github.com/goldvideo/h265player">goldvideo/h265player</a></p>
-<p> 项目主页给了一个 demo：<a target="_blank" rel="noopener" href="https://github.com/goldvideo/h265player">https://github.com/goldvideo/h265player</a>， 体验下来感觉也不是十分流畅，另外就是拖进度条时会出现页面 video 加载 loading 框不断跳动的问题，不是一个十分完美的版本，但是看起来可用</p>
-<p> 另外又有国人维护的另一个 EasyPlayer 的项目，看介绍已经投入生产环境使用，最近一次更新在 4 天前，看起来也有一点希望的样子</p>
-<p> <a target="_blank" rel="noopener" href="https://github.com/tsingsee/EasyPlayer.js">tsingsee/EasyPlayer.js</a></p>
-</li>
-<li><p>服务端转码</p>
-<p> 接云服务商转码服务，返回通用格式/编码的视频流</p>
-</li>
-</ol>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/03/30/%E5%85%B3%E4%BA%8E%20web%20%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -379,7 +325,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-30 22:26:45" itemprop="dateModified" datetime="2021-03-30T22:26:45+08:00">2021-03-30</time>
+                <time title="修改时间：2021-03-30 22:31:31" itemprop="dateModified" datetime="2021-03-30T22:31:31+08:00">2021-03-30</time>
               </span>
 
           
@@ -451,7 +397,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-30 22:26:45" itemprop="dateModified" datetime="2021-03-30T22:26:45+08:00">2021-03-30</time>
+                <time title="修改时间：2021-03-30 22:31:31" itemprop="dateModified" datetime="2021-03-30T22:31:31+08:00">2021-03-30</time>
               </span>
 
           
@@ -525,7 +471,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-30 22:26:45" itemprop="dateModified" datetime="2021-03-30T22:26:45+08:00">2021-03-30</time>
+                <time title="修改时间：2021-03-30 22:31:31" itemprop="dateModified" datetime="2021-03-30T22:31:31+08:00">2021-03-30</time>
               </span>
 
           
@@ -599,7 +545,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-30 22:26:45" itemprop="dateModified" datetime="2021-03-30T22:26:45+08:00">2021-03-30</time>
+                <time title="修改时间：2021-03-30 22:31:31" itemprop="dateModified" datetime="2021-03-30T22:31:31+08:00">2021-03-30</time>
               </span>
 
           
@@ -673,7 +619,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-30 22:26:45" itemprop="dateModified" datetime="2021-03-30T22:26:45+08:00">2021-03-30</time>
+                <time title="修改时间：2021-03-30 22:31:31" itemprop="dateModified" datetime="2021-03-30T22:31:31+08:00">2021-03-30</time>
               </span>
 
           
@@ -746,7 +692,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-30 22:26:45" itemprop="dateModified" datetime="2021-03-30T22:26:45+08:00">2021-03-30</time>
+                <time title="修改时间：2021-03-30 22:31:31" itemprop="dateModified" datetime="2021-03-30T22:31:31+08:00">2021-03-30</time>
               </span>
 
           
@@ -822,7 +768,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-30 22:26:45" itemprop="dateModified" datetime="2021-03-30T22:26:45+08:00">2021-03-30</time>
+                <time title="修改时间：2021-03-30 22:31:31" itemprop="dateModified" datetime="2021-03-30T22:31:31+08:00">2021-03-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -907,7 +853,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-30 22:26:45" itemprop="dateModified" datetime="2021-03-30T22:26:45+08:00">2021-03-30</time>
+                <time title="修改时间：2021-03-30 22:31:31" itemprop="dateModified" datetime="2021-03-30T22:31:31+08:00">2021-03-30</time>
               </span>
 
           
