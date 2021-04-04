@@ -581,8 +581,8 @@ comments:
 
 # Disqus
 disqus:
-  enable: false
-  shortname:
+  enable: true
+  shortname: doctoroyy
   count: true
   #post_meta_order: 0
 
