@@ -582,7 +582,7 @@ comments:
 # Disqus
 disqus:
   enable: true
-  shortname: doctoroyy
+  shortname: https-doctoroyy-github-io
   count: true
   #post_meta_order: 0
 
