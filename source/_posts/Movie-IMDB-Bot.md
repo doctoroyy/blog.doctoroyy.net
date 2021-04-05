@@ -1,5 +1,5 @@
 ---
-title: 一个 IMDB TOP 250 中英文对照信息的自动化工具
+title: 一个获取 IMDB TOP 250 中英文对照信息的自动化工具
 date: 2021-04-03 21:48:42
 tags: workflows
 categories: 电影
