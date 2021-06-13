@@ -97,7 +97,7 @@ upstream django {
     # server unix:///path/to/your/mysite/mysite.sock; # for a file socket
     server 127.0.0.1:8001; # for a web port socket (we'll use this first)
     # 大概就是一次转发，与真正的 Django 应用通信
-    # 二选一，我选用的unix套接字方式而不是端口
+    # 二选一，unix套接字方式或端口
 }
 
 # configuration of the server
