@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://s1.vika.cn/space/2021/01/22/cb972124b3ca4f2daebd9a963d8bbc8a?attname=crop_20210121143805.jpg">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://s1.vika.cn/space/2021/01/22/cb972124b3ca4f2daebd9a963d8bbc8a?attname=crop_20210121143805.jpg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.doctoroyy.net","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="“互联网电影资料库（英语：Internet Movie Database，简称IMDb）是一个关于电影演员、电影、电视节目、电视艺人、电子游戏和电影制作小组的在线数据库。”  IMDB TOP 250收录了世界上排名最高的250部电影，接下来写一个爬虫把这些电影收录起来。 首选语言当然是用世界上最流行的编程语言—Python了。 我用到两个库：requests、openpyxl，前者主要用来处理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python爬取IMDB TOP 250 电影榜单">
+<meta property="og:url" content="https://blog.doctoroyy.net/2019/06/30/Python%E7%88%AC%E5%8F%96IMDB-TOP-250-%E7%94%B5%E5%BD%B1%E6%A6%9C%E5%8D%95/index.html">
+<meta property="og:site_name" content="xiaoyu&#39;s blog">
+<meta property="og:description" content="“互联网电影资料库（英语：Internet Movie Database，简称IMDb）是一个关于电影演员、电影、电视节目、电视艺人、电子游戏和电影制作小组的在线数据库。”  IMDB TOP 250收录了世界上排名最高的250部电影，接下来写一个爬虫把这些电影收录起来。 首选语言当然是用世界上最流行的编程语言—Python了。 我用到两个库：requests、openpyxl，前者主要用来处理">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-06-30T11:05:08.000Z">
+<meta property="article:modified_time" content="2021-06-13T09:11:10.674Z">
+<meta property="article:author" content="xiaoyu">
+<meta property="article:tag" content="爬虫">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://blog.doctoroyy.net/2019/06/30/Python%E7%88%AC%E5%8F%96IMDB-TOP-250-%E7%94%B5%E5%BD%B1%E6%A6%9C%E5%8D%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Python爬取IMDB TOP 250 电影榜单 | xiaoyu's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">xiaoyu's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Coding for a better life!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.doctoroyy.net/2019/06/30/Python%E7%88%AC%E5%8F%96IMDB-TOP-250-%E7%94%B5%E5%BD%B1%E6%A6%9C%E5%8D%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s1.vika.cn/space/2021/01/22/cb972124b3ca4f2daebd9a963d8bbc8a?attname=crop_20210121143805.jpg">
+      <meta itemprop="name" content="xiaoyu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaoyu's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python爬取IMDB TOP 250 电影榜单
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-30 19:05:08" itemprop="dateCreated datePublished" datetime="2019-06-30T19:05:08+08:00">2019-06-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2019/06/30/Python%E7%88%AC%E5%8F%96IMDB-TOP-250-%E7%94%B5%E5%BD%B1%E6%A6%9C%E5%8D%95/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/06/30/Python爬取IMDB-TOP-250-电影榜单/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>“互联网电影资料库（英语：Internet Movie Database，简称IMDb）是一个关于电影演员、电影、电视节目、电视艺人、电子游戏和电影制作小组的在线数据库。”</p>
+</blockquote>
+<p>IMDB TOP 250收录了世界上排名最高的250部电影，接下来写一个爬虫把这些电影收录起来。</p>
+<p>首选语言当然是用世界上最流行的编程语言—Python了。</p>
+<p>我用到两个库：requests、openpyxl，前者主要用来处理网络请求，后者用来操作excel文件。</p>
+<span id="more"></span>
+
+<p>安装:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install requests</span><br><span class="line">pip install openpyxl</span><br></pre></td></tr></table></figure>
+
+
+<p>这个页面就是top 250电影榜单了<a target="_blank" rel="noopener" href="https://www.imdb.com/chart/top%EF%BC%8C">https://www.imdb.com/chart/top，</a></p>
+<p>分析一下网页元素，可以把排名、电影名（英文）、上映年份这几项提取出来，写一个正则表达式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pat &#x3D; r&#39;&lt;td class&#x3D;&quot;titleColumn&quot;&gt;\s*(.*)..*\s*.*\s*title&#x3D;&quot;.*&quot; &gt;(.*)&lt;&#x2F;a&gt;.*\s*&lt;span class&#x3D;&quot;secondaryInfo&quot;&gt;\((.*)\)&lt;&#x2F;span&gt;&#39;</span><br></pre></td></tr></table></figure>
+
+
+<p>预保存一下数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">res = find_all_by_pat(pat, imdb_doc)</span><br></pre></td></tr></table></figure>
+
+
+<p>拿到这几项之后还需要中文的电影名，资料来源我找的是豆瓣，下面这个地址可以得到一个非异步加载的页面，这样的话虽然比直接拿纯数据（通过网站的api拿纯数据有点麻烦，即使拿到了也很快就会被ban掉）慢一点，但是简单方便</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">url &#x3D; &#39;https:&#x2F;&#x2F;www.douban.com&#x2F;search?cat&#x3D;1002&amp;q&#x3D;%s&#39; % query_name</span><br></pre></td></tr></table></figure>
+
+<p>观察网页可以发现，影片名很容易出现在相关电影这一栏下的第一行，我试了一下不能保证100%正确，但在大多情况下是准确的，这个办法会出现匹配不了的情况，但这样情况不多，在接受范围之内，这样最起码比手动收集快了很多倍，分析一下源码，得到如下正则：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pat2 = <span class="string">r&#x27;qcat.*\s*.*&gt;(.*?)\s*&lt;/a&gt;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>接下来一边访问一边插入数据就行了</p>
+<p>现在数据已经完整，最后一步，创建一个excel文件，简单设置一下样式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wb = Workbook()</span><br><span class="line">sheet = wb.active</span><br><span class="line">sheet.column_dimensions[<span class="string">&#x27;B&#x27;</span>].width = <span class="number">60</span></span><br><span class="line">sheet.column_dimensions[<span class="string">&#x27;C&#x27;</span>].width = <span class="number">25</span></span><br></pre></td></tr></table></figure>
+
+<p>插入数据：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for i in range(len(res)):</span><br><span class="line">  for j in range(len(res[i])):</span><br><span class="line">    sheet.cell(row&#x3D;i + 1, column&#x3D;j + 1).value &#x3D; res[i][j]</span><br></pre></td></tr></table></figure>
+
+<p>最后保存文件：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wb.save(<span class="string">&#x27;imdb.xlsx&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>打开文件，数据全部拿到了(<em>^▽^</em>)</p>
+<p>附上完整代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">import random</span><br><span class="line">import re</span><br><span class="line">import requests</span><br><span class="line">from openpyxl import Workbook</span><br><span class="line">from time import sleep</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def find_all_by_pat(pat, string):</span><br><span class="line">  res &#x3D; re.findall(pat, string)</span><br><span class="line">  return res</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def get_html_doc(url):</span><br><span class="line">  pro &#x3D; [&#39;122.152.196.126&#39;, &#39;114.215.174.227&#39;, &#39;119.185.30.75&#39;]</span><br><span class="line">  head &#x3D; &#123;</span><br><span class="line">    &#39;user-Agent&#39;: &#39;Mozilla&#x2F;5.0(Windows NT 10.0;Win64 x64)AppleWebkit&#x2F;537.36(KHTML,like Gecko) chrome&#x2F;58.0.3029.110 Safari&#x2F;537.36&#39;</span><br><span class="line">  &#125;</span><br><span class="line">  resopnse &#x3D; requests.get(url, proxies&#x3D;&#123;&#39;http&#39;: random.choice(pro)&#125;, headers&#x3D;head)</span><br><span class="line">  resopnse.encoding &#x3D; &#39;utf-8&#39;</span><br><span class="line">  html_doc &#x3D; resopnse.text</span><br><span class="line">  return html_doc</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def get_douban_html(query_name):</span><br><span class="line">  url &#x3D; &#39;https:&#x2F;&#x2F;www.douban.com&#x2F;search?cat&#x3D;1002&amp;q&#x3D;%s&#39; % query_name</span><br><span class="line">  douban_search_res &#x3D; get_html_doc(url)</span><br><span class="line">  return douban_search_res</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def get_chinese_name(pat, doc):</span><br><span class="line">  res_list &#x3D; find_all_by_pat(pat, doc)</span><br><span class="line">  try:</span><br><span class="line">    return res_list[1]</span><br><span class="line">  except:</span><br><span class="line">    return &#39; &#39;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def get_director_name(pat, doc):</span><br><span class="line">  res &#x3D; find_all_by_pat(pat, doc)</span><br><span class="line">  try:</span><br><span class="line">    return res[0].split(&#39;&#x2F;&#39;)[1]</span><br><span class="line">  except:</span><br><span class="line">    return &#39; &#39;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if __name__ &#x3D;&#x3D; &quot;__main__&quot;:</span><br><span class="line">  url &#x3D; &quot;https:&#x2F;&#x2F;www.imdb.com&#x2F;chart&#x2F;top&quot;</span><br><span class="line">  imdb_doc &#x3D; get_html_doc(url)</span><br><span class="line">  pat &#x3D; r&#39;&lt;td class&#x3D;&quot;titleColumn&quot;&gt;\s*(.*)..*\s*.*\s*title&#x3D;&quot;.*&quot; &gt;(.*)&lt;&#x2F;a&gt;.*\s*&lt;span class&#x3D;&quot;secondaryInfo&quot;&gt;\((.*)\)&lt;&#x2F;span&gt;&#39;</span><br><span class="line">  res &#x3D; find_all_by_pat(pat, imdb_doc)</span><br><span class="line"></span><br><span class="line">  # pat1 &#x3D; &#39;&gt;(.*)\s*&lt;&#x2F;a&gt;\s*&lt;span class&#x3D;&quot;ic-mark ic-movie-mark&quot;&gt;可播放&lt;&#x2F;span&gt;&#39;</span><br><span class="line">  pat2 &#x3D; r&#39;qcat.*\s*.*&gt;(.*?)\s*&lt;&#x2F;a&gt;&#39;</span><br><span class="line">  pat3 &#x3D; &#39;&lt;span\s*class&#x3D;&quot;subject-cast&quot;&gt;(.*)&lt;&#x2F;span&gt;&#39;</span><br><span class="line">  for i in range(len(res)):</span><br><span class="line">    doc &#x3D; get_douban_html(res[i][1])</span><br><span class="line">    chinise_name &#x3D; get_chinese_name(pat2, doc)</span><br><span class="line"></span><br><span class="line">    director_name &#x3D; get_director_name(pat3, doc)</span><br><span class="line"></span><br><span class="line">    res[i] &#x3D; list(res[i])</span><br><span class="line"></span><br><span class="line">    res[i].insert(1, chinise_name)</span><br><span class="line">    res[i].insert(3, director_name)</span><br><span class="line"></span><br><span class="line">    print(res[i])</span><br><span class="line">    sleep(random.random() * 1.2)</span><br><span class="line"></span><br><span class="line">  wb &#x3D; Workbook()</span><br><span class="line">  sheet &#x3D; wb.active</span><br><span class="line">  sheet.column_dimensions[&#39;B&#39;].width &#x3D; 60</span><br><span class="line">  sheet.column_dimensions[&#39;C&#39;].width &#x3D; 25</span><br><span class="line">  for i in range(len(res)):</span><br><span class="line">    for j in range(len(res[i])):</span><br><span class="line">      sheet.cell(row&#x3D;i + 1, column&#x3D;j + 1).value &#x3D; res[i][j]</span><br><span class="line">  wb.save(&#39;imdb.xlsx&#39;)</span><br></pre></td></tr></table></figure>
+
+<p>电影详细信息可以保存我的另一篇博客: <a href="https://blog.doctoroyy.net/2018/12/10/IMDB%20TOP%20250/">传送门</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%88%AC%E8%99%AB/" rel="tag"># 爬虫</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/06/29/%E5%8C%97%E4%BA%AC%E4%BF%A1%E6%81%AF%E7%A7%91%E6%8A%80%E5%A4%A7%E5%AD%A6%E7%AC%AC%E5%8D%81%E4%B8%80%E5%B1%8A%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B%EF%BC%88%E9%87%8D%E7%8E%B0%E8%B5%9B%EF%BC%89/" rel="prev" title="北京信息科技大学第十一届程序设计竞赛（重现赛）">
+      <i class="fa fa-chevron-left"></i> 北京信息科技大学第十一届程序设计竞赛（重现赛）
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/06/30/IMDB-TOP-250/" rel="next" title="IMDB TOP 250 电影榜单">
+      IMDB TOP 250 电影榜单 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="xiaoyu"
+      src="https://s1.vika.cn/space/2021/01/22/cb972124b3ca4f2daebd9a963d8bbc8a?attname=crop_20210121143805.jpg">
+  <p class="site-author-name" itemprop="name">xiaoyu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/doctoroyy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;doctoroyy" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:doctor.oyy@gmail.com" title="E-Mail → mailto:doctor.oyy@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">xiaoyu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-doctoroyy-github-io.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://blog.doctoroyy.net/2019/06/30/Python%E7%88%AC%E5%8F%96IMDB-TOP-250-%E7%94%B5%E5%BD%B1%E6%A6%9C%E5%8D%95/";
+    this.page.identifier = "2019/06/30/Python爬取IMDB-TOP-250-电影榜单/";
+    this.page.title = "Python爬取IMDB TOP 250 电影榜单";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://https-doctoroyy-github-io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
