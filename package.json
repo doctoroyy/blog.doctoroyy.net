@@ -8,7 +8,7 @@
     "deploy": "hexo deploy",
     "server": "hexo server",
     "g": "hexo g",
-    "s": "yarn g && hexo s"
+    "s": "hexo clean && yarn g && hexo s"
   },
   "hexo": {
     "version": "5.4.0"

@@ -1,5 +1,5 @@
 ---
-title: 如何将Django项目部署到Linux云服务器？
+title: 如何将 Django 项目部署到Linux云服务器？
 date: 2019-10-29 16:55:07
 tags: 服务器
 categories: 后端
