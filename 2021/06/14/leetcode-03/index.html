@@ -21,24 +21,20 @@
     var CONFIG = {"hostname":"blog.doctoroyy.net","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="首先观察测试如下代码： 12345678910&lt;style type&#x3D;&quot;text&#x2F;css&quot;&gt;  div &amp;#123;    width: 100px;    height: 100px;    border-color: red orange yellow green;    border-width: 20px;    border-style: solid;">
+  <meta name="description" content="Given a string s, find the length of the longest substring without repeating characters. Example 1: 1234Input: s &#x3D; &quot;abcabcbb&quot;Output: 3Explanation: The answer is &quot;abc&quot;, with th">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何用css画一个三角形？">
-<meta property="og:url" content="https://blog.doctoroyy.net/2019/07/20/%E5%A6%82%E4%BD%95%E7%94%A8css%E7%94%BB%E4%B8%80%E4%B8%AA%E4%B8%89%E8%A7%92%E5%BD%A2%EF%BC%9F/index.html">
+<meta property="og:title" content="3. Longest Substring Without Repeating Characters">
+<meta property="og:url" content="https://blog.doctoroyy.net/2021/06/14/leetcode-03/index.html">
 <meta property="og:site_name" content="xiaoyu&#39;s blog">
-<meta property="og:description" content="首先观察测试如下代码： 12345678910&lt;style type&#x3D;&quot;text&#x2F;css&quot;&gt;  div &amp;#123;    width: 100px;    height: 100px;    border-color: red orange yellow green;    border-width: 20px;    border-style: solid;">
+<meta property="og:description" content="Given a string s, find the length of the longest substring without repeating characters. Example 1: 1234Input: s &#x3D; &quot;abcabcbb&quot;Output: 3Explanation: The answer is &quot;abc&quot;, with th">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190720174259267.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2019072017473071.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20190720175142505.png">
-<meta property="article:published_time" content="2019-07-20T09:52:39.000Z">
+<meta property="article:published_time" content="2021-06-14T03:22:49.000Z">
 <meta property="article:modified_time" content="2021-06-14T04:31:32.821Z">
 <meta property="article:author" content="xiaoyu">
-<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="algorithm">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190720174259267.png">
 
-<link rel="canonical" href="https://blog.doctoroyy.net/2019/07/20/%E5%A6%82%E4%BD%95%E7%94%A8css%E7%94%BB%E4%B8%80%E4%B8%AA%E4%B8%89%E8%A7%92%E5%BD%A2%EF%BC%9F/">
+<link rel="canonical" href="https://blog.doctoroyy.net/2021/06/14/leetcode-03/">
 
 
 <script id="page-configurations">
@@ -51,7 +47,7 @@
   };
 </script>
 
-  <title>如何用css画一个三角形？ | xiaoyu's blog</title>
+  <title>3. Longest Substring Without Repeating Characters | xiaoyu's blog</title>
   
 
 
@@ -172,7 +168,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.doctoroyy.net/2019/07/20/%E5%A6%82%E4%BD%95%E7%94%A8css%E7%94%BB%E4%B8%80%E4%B8%AA%E4%B8%89%E8%A7%92%E5%BD%A2%EF%BC%9F/">
+    <link itemprop="mainEntityOfPage" href="https://blog.doctoroyy.net/2021/06/14/leetcode-03/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://s1.vika.cn/space/2021/01/22/cb972124b3ca4f2daebd9a963d8bbc8a?attname=crop_20210121143805.jpg">
@@ -185,7 +181,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          如何用css画一个三角形？
+          3. Longest Substring Without Repeating Characters
         </h1>
 
         <div class="post-meta">
@@ -195,7 +191,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-07-20 17:52:39" itemprop="dateCreated datePublished" datetime="2019-07-20T17:52:39+08:00">2019-07-20</time>
+              <time title="创建时间：2021-06-14 11:22:49" itemprop="dateCreated datePublished" datetime="2021-06-14T11:22:49+08:00">2021-06-14</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -203,7 +199,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a>
                 </span>
             </span>
 
@@ -216,8 +212,8 @@
       </span>
       <span class="post-meta-item-text">Disqus：</span>
     
-    <a title="disqus" href="/2019/07/20/%E5%A6%82%E4%BD%95%E7%94%A8css%E7%94%BB%E4%B8%80%E4%B8%AA%E4%B8%89%E8%A7%92%E5%BD%A2%EF%BC%9F/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/07/20/如何用css画一个三角形？/" itemprop="commentCount"></span>
+    <a title="disqus" href="/2021/06/14/leetcode-03/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/06/14/leetcode-03/" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -232,24 +228,37 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><strong>首先观察测试如下代码：</strong></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span>&gt;</span></span><br><span class="line"><span class="css">  <span class="selector-tag">div</span> &#123;</span></span><br><span class="line"><span class="css">    <span class="attribute">width</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">    <span class="attribute">height</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">    <span class="attribute">border-color</span>: red orange yellow green;</span></span><br><span class="line"><span class="css">    <span class="attribute">border-width</span>: <span class="number">20px</span>;</span></span><br><span class="line"><span class="css">    <span class="attribute">border-style</span>: solid;</span></span><br><span class="line"><span class="css">    <span class="attribute">background</span>: white;</span></span><br><span class="line">  &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+        <p>Given a string <code>s</code>, find the length of the <strong>longest substring</strong> without repeating characters.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Input: s &#x3D; &quot;abcabcbb&quot;</span><br><span class="line">Output: 3</span><br><span class="line">Explanation: The answer is &quot;abc&quot;, with the length of 3.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <span id="more"></span>
 
-<p><strong>按照均分法则，上、下、左、右四个边框是占比完全等分盒子四周的，要想等分四条边框就只有这样：</strong></p>
-<p><img data-src="https://img-blog.csdnimg.cn/20190720174259267.png" alt="image"></p>
-<p><strong>现在尝试把其中三条边框颜色设置成透明色：</strong></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">border-color: transparent transparent yellow transparent;</span><br></pre></td></tr></table></figure>
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Input: s &#x3D; &quot;bbbbb&quot;</span><br><span class="line">Output: 1</span><br><span class="line">Explanation: The answer is &quot;b&quot;, with the length of 1.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Input: s &#x3D; &quot;pwwkew&quot;</span><br><span class="line">Output: 3</span><br><span class="line">Explanation: The answer is &quot;wke&quot;, with the length of 3.</span><br><span class="line">Notice that the answer must be a substring, &quot;pwke&quot; is a subsequence and not a substring.</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p><strong>再来观察：</strong></p>
-<p><img data-src="https://img-blog.csdnimg.cn/2019072017473071.png" alt="image"></p>
-<p><strong>现在的形状是梯形，很容易想到是因为现在盒子是有宽度和高度的，把宽高设成0：</strong></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">width: 0;</span><br><span class="line">height: 0;</span><br></pre></td></tr></table></figure>
+<p><strong>Example 4:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: s &#x3D; &quot;&quot;</span><br><span class="line">Output: 0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p><strong>就成了这个样子：</strong></p>
-<p><img data-src="https://img-blog.csdnimg.cn/20190720175142505.png" alt="image"></p>
-<p><strong>大功告成，这就是我们要得到的三角形了！</strong></p>
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>0 &lt;= s.length &lt;= 5 * 104</code></li>
+<li><code>s</code> consists of English letters, digits, symbols and spaces.</li>
+</ul>
+<p>这道题很容易想到可以用滑动窗口的办法解决，代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// O(n^2)</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">  <span class="keyword">if</span> (s.<span class="built_in">size</span>() &lt;= <span class="number">1</span>) <span class="keyword">return</span> s.<span class="built_in">size</span>();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">int</span> maxRange = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">int</span> left = <span class="number">0</span>, right;</span><br><span class="line">  <span class="keyword">for</span> (right = <span class="number">1</span>; right &lt; s.<span class="built_in">size</span>(); right++) &#123;</span><br><span class="line">    <span class="keyword">int</span> equalIndex = <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = right - <span class="number">1</span>; i &gt;= left; i--) &#123;</span><br><span class="line">      <span class="keyword">if</span> (s[right] == s[i]) &#123;</span><br><span class="line">        equalIndex = i;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (equalIndex != <span class="number">-1</span>) &#123;</span><br><span class="line">      left = equalIndex + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    maxRange = <span class="built_in">max</span>(maxRange, right - left + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> maxRange;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于 <code>0</code> 和 <code>1</code> 这种特殊情况，直接返回串的长度即可。</p>
+<p>这里有一个优化可以省一点时间，那就是每次找到重复的字符时，事实上可以直接将 <code>left</code> 移动到 <code>equalIndex</code> 的下一位，之前的都可以不用管 (假设一步一步的移动，那么在下一次主循环中，马上又发现有重复的字符，且发生重复的位置不变，其实，最终的 <code>left</code> 一定是放在<code>equalIndex + 1</code>）。</p>
+<p>这个解法虽然可以 <code>AC</code>，但每次查重复字符的时候还是有点耗时间的，那么能不能让查重快一点？</p>
+<p>办法就是用<strong>空间换时间：</strong></p>
+<p>我们可以把 <code>equalIndex</code> 用一个数组记录下来，代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(string s)</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">  <span class="keyword">if</span> (s.<span class="built_in">size</span>() &lt;= <span class="number">1</span>) <span class="keyword">return</span> s.<span class="built_in">size</span>();</span><br><span class="line"></span><br><span class="line">  <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">equalIndexes</span><span class="params">(<span class="number">128</span>, <span class="number">-1</span>)</span></span>;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">int</span> maxRange = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">int</span> left = <span class="number">0</span>, right;</span><br><span class="line">  <span class="keyword">for</span> (right = <span class="number">0</span>; right &lt; s.<span class="built_in">size</span>(); right++) &#123;</span><br><span class="line">    <span class="keyword">int</span> equalIndex = equalIndexes[s[right]];</span><br><span class="line">	</span><br><span class="line">    <span class="keyword">if</span> (equalIndex != <span class="number">-1</span> &amp;&amp; equalIndex &gt;= left) &#123;</span><br><span class="line">      left = equalIndex + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    maxRange = <span class="built_in">max</span>(maxRange, right - left + <span class="number">1</span>);</span><br><span class="line">    equalIndexes[s[right]] = right;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> maxRange;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>不过注意判断 equalIndex &gt;= left，要保证不走回头路，因为下一个区间里的字符可能在之前的区间出现过。</p>
+<p>这样一来的话，每个字符都只用访问一遍，时间复杂度优化到了 O(n)。</p>
 
     </div>
 
@@ -259,7 +268,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/CSS/" rel="tag"># CSS</a>
+              <a href="/tags/algorithm/" rel="tag"># algorithm</a>
           </div>
 
         
@@ -268,13 +277,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2019/07/19/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" rel="prev" title="归并排序">
-      <i class="fa fa-chevron-left"></i> 归并排序
+    <a href="/2021/04/03/Movie-IMDB-Bot/" rel="prev" title="一个获取 IMDB TOP 250 中英文对照信息的自动化工具">
+      <i class="fa fa-chevron-left"></i> 一个获取 IMDB TOP 250 中英文对照信息的自动化工具
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2019/07/22/19-Remove-Nth-Node-From-End-of-List/" rel="next" title="19. Remove Nth Node From End of List">
-      19. Remove Nth Node From End of List <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -480,9 +486,9 @@
 </script>
 <script>
   var disqus_config = function() {
-    this.page.url = "https://blog.doctoroyy.net/2019/07/20/%E5%A6%82%E4%BD%95%E7%94%A8css%E7%94%BB%E4%B8%80%E4%B8%AA%E4%B8%89%E8%A7%92%E5%BD%A2%EF%BC%9F/";
-    this.page.identifier = "2019/07/20/如何用css画一个三角形？/";
-    this.page.title = "如何用css画一个三角形？";
+    this.page.url = "https://blog.doctoroyy.net/2021/06/14/leetcode-03/";
+    this.page.identifier = "2021/06/14/leetcode-03/";
+    this.page.title = "3. Longest Substring Without Repeating Characters";
     };
   NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
     if (window.DISQUS) {
