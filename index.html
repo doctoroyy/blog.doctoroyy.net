@@ -162,6 +162,150 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blog.doctoroyy.net/2021/09/30/%E5%9B%BE%E8%AE%BA%EF%BC%9A%E6%9C%89%E5%90%91%E5%9B%BE%E7%9A%84%E7%8E%AF%E8%B7%AF%E6%A3%80%E6%B5%8B%E5%92%8C%E5%8F%96%E7%8E%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s1.vika.cn/space/2021/01/22/cb972124b3ca4f2daebd9a963d8bbc8a?attname=crop_20210121143805.jpg">
+      <meta itemprop="name" content="xiaoyu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xiaoyu's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/09/30/%E5%9B%BE%E8%AE%BA%EF%BC%9A%E6%9C%89%E5%90%91%E5%9B%BE%E7%9A%84%E7%8E%AF%E8%B7%AF%E6%A3%80%E6%B5%8B%E5%92%8C%E5%8F%96%E7%8E%AF/" class="post-title-link" itemprop="url">图论：有向图的环路检测和取环</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-09-30 13:10:51" itemprop="dateCreated datePublished" datetime="2021-09-30T13:10:51+08:00">2021-09-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus：</span>
+    
+    <a title="disqus" href="/2021/09/30/%E5%9B%BE%E8%AE%BA%EF%BC%9A%E6%9C%89%E5%90%91%E5%9B%BE%E7%9A%84%E7%8E%AF%E8%B7%AF%E6%A3%80%E6%B5%8B%E5%92%8C%E5%8F%96%E7%8E%AF/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2021/09/30/图论：有向图的环路检测和取环/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="图论：有向图的环路检测和取环"><a href="#图论：有向图的环路检测和取环" class="headerlink" title="图论：有向图的环路检测和取环"></a>图论：有向图的环路检测和取环</h1><h1 id="图的相关概念"><a href="#图的相关概念" class="headerlink" title="图的相关概念"></a>图的相关概念</h1><h3 id="顶点"><a href="#顶点" class="headerlink" title="顶点"></a>顶点</h3><h3 id="边（有向、无向）"><a href="#边（有向、无向）" class="headerlink" title="边（有向、无向）"></a>边（有向、无向）</h3><h3 id="度（入度、出度）"><a href="#度（入度、出度）" class="headerlink" title="度（入度、出度）"></a>度（入度、出度）</h3><p>一个顶点如果有一条边指向它，那我们就说这个顶点的入度为<code>1</code> ；类似地，从顶点出发，有一条边我们就说这个顶点的出度为 <code>1</code></p>
+<h3 id="图的表示"><a href="#图的表示" class="headerlink" title="图的表示"></a>图的表示</h3><p><strong>邻接矩阵</strong></p>
+<p><img data-src="https://s1.vika.cn/space/2021/09/30/8d2ec17f535549bb9352e09be0123da4?attname=image.png" alt="1-1"></p>
+<p>假设有 <code>n</code> 个顶点 <code>m</code> 条边的图，声明一个 <code>m * n</code> 的二维数组，<code>G[i][j] = 1</code> 表示 <code>i → j</code> 是连通的</p>
+<p>但存在几个问题：</p>
+<ul>
+<li>遍历元素时，存在的边和不存在的边都不得不检查一遍，导致遍历效率低。</li>
+<li>不能存储重复的边。</li>
+<li>当顶点数量多时，内存空间开销会很大。</li>
+<li>空间利用率不高。</li>
+<li>存储无向图时，由于此时矩阵是对称的，而对称位置上的成对元素保存的信息是重复的，导致空间利用率不高。</li>
+</ul>
+<p><strong>邻接表</strong></p>
+<p><img data-src="https://s1.vika.cn/space/2021/09/30/0d19ba296af74857a35626c8b895bbde?attname=image.png" alt="1-2"></p>
+<p>用一个数组<code>adj</code>存储以这个点可以到达的所有顶点，例如：<code>adj[i] = [a, b, c, d]</code> ，<code>adj[i]</code> 可以是一个链表或者数组</p>
+<p>数表中关联字段 cellValue 的结构实际上也可以看成一种邻接表(从一个 id 出发，关联了一个 id 数组)：  id → reocod → linkfield → cellvalue [id1, id2, id3]</p>
+<h1 id="图的环检测方法"><a href="#图的环检测方法" class="headerlink" title="图的环检测方法"></a>图的环检测方法</h1><h3 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/liujian20150808/article/details/50848646">并查集详解 –图文解说,简单易懂(转)</a></p>
+<p> <strong>Q &amp; A</strong></p>
+<ol>
+<li>为什么需要路径压缩？为什么可以压缩？ 最坏的情况下，查找路径可能退化成一条链，极大影响查找效率； <code>pre</code> 数组并不用存储真正的节点之间的关系，它的作用只有一个，判断任意 <code>2</code> 个节点有没有一个公共祖先； 压缩的几种方式：<ol>
+<li>按秩合并</li>
+<li>边查找边合并</li>
+</ol>
+</li>
+<li>什么情况下说明有环？ 将要合并的 <code>2</code> 个节点，它们已经拥有公共祖先的时候，说明可能存在环（注意是<code>可能存在</code> ）</li>
+<li>那什么情况下有公共祖先但是也没有环呢？ <code>有向图</code>的情况，要知道有向图的边是有方向的，即使 <code>2</code> 个节点存在公共祖先，也不一定构成环，例如：<code>[ [1,2], [1,3], [2,3] ]</code> 不过下面这道题涉及的只是无向图，因此不用特别处理。</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [https://leetcode-cn.com/problems/graph-valid-tree/](https://leetcode-cn.com/problems/graph-valid-tree/)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Input: n = 5, edges = [[0,1],[0,2],[0,3],[1,4]]</span></span><br><span class="line"><span class="comment">// Output: true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Input: n = 5, edges = [[0,1],[1,2],[2,3],[1,3],[1,4]]</span></span><br><span class="line"><span class="comment">// Output: false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">2010</span>;</span><br><span class="line"><span class="keyword">int</span> pre[maxN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> x == pre[x] ? x : pre[x] = <span class="built_in">find</span>(pre[x]); <span class="comment">// 路径压缩，边查找边压缩</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> _union(<span class="keyword">int</span> x, <span class="keyword">int</span> y) &#123;</span><br><span class="line">  <span class="keyword">int</span> fx = <span class="built_in">find</span>(x), fy = <span class="built_in">find</span>(y);</span><br><span class="line">  <span class="keyword">if</span> (fx != fy) &#123;</span><br><span class="line">    pre[fx] = fy;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">validTree</span><span class="params">(<span class="keyword">int</span> n, vector&lt;vector&lt;<span class="keyword">int</span>&gt; &gt;&amp; edges)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        pre[i] = i;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; edges.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> a = edges[i][<span class="number">0</span>], b = edges[i][<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">find</span>(a) == <span class="built_in">find</span>(b)) &#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        _union(a, b);</span><br><span class="line">      &#125;</span><br><span class="line">			<span class="comment">// 多个分离的树也不是一棵合法的树</span></span><br><span class="line">      set&lt;<span class="keyword">int</span>&gt; preSet;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        preSet.<span class="built_in">insert</span>(<span class="built_in">find</span>(i));</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> preSet.<span class="built_in">size</span>() == <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="拓扑排序"><a href="#拓扑排序" class="headerlink" title="拓扑排序"></a>拓扑排序</h3><p><strong>什么是拓扑关系？</strong></p>
+<p>举个例子，一门课程都有它的先修课程</p>
+<p><img data-src="https://s1.vika.cn/space/2021/09/30/78acb382f1e146859722be1200b9014a?attname=image.png" alt="1-3"></p>
+<p>用图的方式表示就是:</p>
+<p><img data-src="https://s1.vika.cn/space/2021/09/30/aeb16c50eee24c178ddec3c3455d890f?attname=image.png" alt="Untitled"></p>
+<p>课程之间的相互关系就是一种<code>拓扑关系</code>。</p>
+<p><strong>什么是拓扑序列，如何寻找拓扑序列？</strong></p>
+<p>我们知道了任意一门课程的先修课程，如果此时要你来给学生做一张大学四年的课程表，那么这种课程表中课程组成的序列实际上就是一个<code>拓扑序列</code></p>
+<p>具体做法：在有向图中，找出入度为 <code>0</code> 的顶点，将这些顶点放到队列中，依次删除这些顶点及其相关的边，重复上一步，就可以得到一个<code>拓扑序列</code> </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 拓扑排序</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// input: [[1,0],[2,0],[3,1],[3,2]]</span></span><br><span class="line"><span class="comment">// output: [0, 1, 2, 3] or [0, 2, 1, 3]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> edges = [[<span class="number">1</span>,<span class="number">0</span>],[<span class="number">2</span>,<span class="number">0</span>],[<span class="number">3</span>,<span class="number">1</span>],[<span class="number">3</span>,<span class="number">2</span>]];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> inDegree = [];</span><br><span class="line"><span class="comment">// 求顶点的入度</span></span><br><span class="line">edges.forEach(<span class="function"><span class="params">edge</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> [target, source] = edge;</span><br><span class="line">  inDegree[target]++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 找出入度为 0 的顶点</span></span><br><span class="line"><span class="keyword">let</span> queue = [];</span><br><span class="line">inDegree.forEach(<span class="function">(<span class="params">val, index</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (val === <span class="number">0</span>) &#123;</span><br><span class="line">    queue.push(index)</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> res = [];</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (queue.length) &#123;</span><br><span class="line">  <span class="keyword">const</span> cur = queue.shift();</span><br><span class="line">  res.push(cur);</span><br><span class="line">  edges.forEach(<span class="function"><span class="params">edge</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> [target, source] = edge;</span><br><span class="line">    <span class="keyword">if</span> (source === cur) &#123;</span><br><span class="line">      inDegree[target]--;</span><br><span class="line">			<span class="comment">// 新的入度为 0 的顶点，一定在这里产生</span></span><br><span class="line">      <span class="keyword">if</span> (inDegree[target] == <span class="number">0</span>) &#123;</span><br><span class="line">        queue.push(target);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(res)</span><br></pre></td></tr></table></figure>
+
+<p><strong>如果找不到一个入度为 <code>0</code> 的顶点，是否就说明一定存在环？</strong></p>
+<p>直觉上是，不过还没找到证明方法。</p>
+<h1 id="如何在检测环的同时取出环？"><a href="#如何在检测环的同时取出环？" class="headerlink" title="如何在检测环的同时取出环？"></a>如何在检测环的同时取出环？</h1><p>要想取出环，意味着我们需要将整个图至少遍历一遍，比较直接的做法是<code>深度优先</code>遍历</p>
+<p>算法讲解：<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=rKQaZuoUR4M">https://www.youtube.com/watch?v=rKQaZuoUR4M</a></p>
+<p><strong>Q &amp; A</strong></p>
+<ol>
+<li>为什么要使用 <code>3</code> 种颜色标记节点？ 想象一下，对于图 <code>[ [1,2], [2, 1], [1,3], [3,1] ]</code> 如果只是简单计数或 <code>bool</code> 标记，从 <code>1</code> 出发，找到一个环之后，就再不可能去访问节点 <code>1</code> 了，而节点 <code>1</code> 实际上还出现在另一个环中； <strong>换句话说，每个节点我们可能不止访问 <code>1</code> 次(也不是 <code>2</code> 次）</strong></li>
+<li><code>pre</code> 数组是干什么用的？ 记录节点的父节点，找到环时，从 <code>dfs</code> 最后一个探访的一个节点出发，依次寻找其父节点，直到形成一个环或者在中途路径断开（也就是说这个节点没有父节点了），到此为止，这个过程就在构造环</li>
+<li>复杂度是多少？ 假设顶点数量为 <code>V</code>， 边的数量为 <code>E</code> ， 每条边都要走一遍，那么时间复杂度为 <code>O(V+E)</code> ，空间复杂度为 <code>O(V)</code> (实际上我们需要额外的空间保存环结构，所以最坏情况下占用空间应该是 cv1+cv2+…+cvv＝2^v）</li>
+<li>存在什么隐患？ 图的层级太深会爆栈</li>
+</ol>
+<p><strong>JavaScript 版：</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [https://cses.fi/problemset/task/1678](https://cses.fi/problemset/task/1678)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// const n = 4, m = 5;</span></span><br><span class="line"><span class="comment">// const edges = [[1,3], [2,1], [2,4], [3,2], [3,4]];</span></span><br><span class="line"><span class="comment">//const n = 10, m = 20;</span></span><br><span class="line"><span class="comment">//const edges = [[9,8], [2,9],[7,5], [4,5],[1,5],[3,8],[4,2],[5,4],[6,5],[3,6],[8,10],[10,9],[10,7],[9,3],[7,6],[8,7],[7,3],[8,9],[7,10],[2,1]]</span></span><br><span class="line"><span class="keyword">const</span> n = <span class="number">6</span>, m = <span class="number">7</span>;</span><br><span class="line"><span class="keyword">const</span> edges = [[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">2</span>, <span class="number">3</span>], [<span class="number">3</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">4</span>], [<span class="number">4</span>, <span class="number">6</span>], [<span class="number">6</span>, <span class="number">5</span>], [<span class="number">5</span>, <span class="number">4</span>]];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> pre = <span class="built_in">Array</span>(n + <span class="number">1</span>).fill(-<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> color = <span class="built_in">Array</span>(n + <span class="number">1</span>).fill(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 建立邻接表</span></span><br><span class="line"><span class="keyword">const</span> adj = [[], [], [], [], [], [], [], [], []]; <span class="comment">// 不知道为什么，初始化用 Array(n + 1).fill([]) 会报错</span></span><br><span class="line">edges.forEach(<span class="function"><span class="params">edge</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> [source, target] = edge;</span><br><span class="line">  adj[source].push(target);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> cycles = [];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> buildCycle = <span class="function">(<span class="params">start, end</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> cycle = [start];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> cur = end; cur !== start; cur = pre[cur]) &#123;</span><br><span class="line">    cycle.push(cur);</span><br><span class="line">  &#125;</span><br><span class="line">  cycle.push(start);</span><br><span class="line">  cycles.push(cycle.reverse());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> dfs = <span class="function"><span class="params">source</span> =&gt;</span> &#123;</span><br><span class="line">  color[source] = <span class="number">1</span>;</span><br><span class="line">  adj[source].forEach(<span class="function"><span class="params">target</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (color[target] === <span class="number">0</span>) &#123;</span><br><span class="line">			pre[target] = source;</span><br><span class="line">      dfs(target);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (color[target] === <span class="number">1</span>) &#123;</span><br><span class="line">      <span class="comment">// console.log(target, source)</span></span><br><span class="line">      buildCycle(target, source);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  color[source] = <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> v = <span class="number">1</span>; v &lt;= n; v++) &#123;</span><br><span class="line">  <span class="keyword">if</span> (color[v] === <span class="number">0</span>) &#123;</span><br><span class="line">    dfs(v);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(cycles)</span><br></pre></td></tr></table></figure>
+
+<p><strong>C++版：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">1e5</span>+<span class="number">10</span>;</span><br><span class="line">vector&lt;int&gt; color(maxN, 0) , pre(maxN, 0), adj[maxN];</span><br><span class="line"></span><br><span class="line">vector&lt;vector&lt;<span class="keyword">int</span>&gt; &gt; res;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build_cycle</span><span class="params">(<span class="keyword">int</span> start, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">  vector&lt;<span class="keyword">int</span>&gt; cycle;</span><br><span class="line">  cycle.<span class="built_in">push_back</span>(start);</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> cur = end; cur != start; cur = pre[cur]) &#123;</span><br><span class="line">    cycle.<span class="built_in">push_back</span>(cur);</span><br><span class="line">  &#125;</span><br><span class="line">  cycle.<span class="built_in">push_back</span>(start);</span><br><span class="line"></span><br><span class="line">  vector&lt;<span class="keyword">int</span>&gt; reversedCycle;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = cycle.<span class="built_in">size</span>() - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">    reversedCycle.<span class="built_in">push_back</span>(cycle[i]);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  res.<span class="built_in">push_back</span>(reversedCycle);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> source)</span> </span>&#123;</span><br><span class="line">  color[source] = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> &amp;target: adj[source]) &#123;</span><br><span class="line">    <span class="keyword">if</span> (color[target] == <span class="number">0</span>) &#123;</span><br><span class="line">      pre[target] = source;</span><br><span class="line">      <span class="built_in">dfs</span>(target);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (color[target] == <span class="number">1</span>) &#123;</span><br><span class="line">      <span class="built_in">build_cycle</span>(target, source);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  color[source] = <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> n, m;</span><br><span class="line">  cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">  <span class="keyword">while</span> (m--) &#123;</span><br><span class="line">    <span class="keyword">int</span> a, b;</span><br><span class="line">    cin &gt;&gt; a &gt;&gt; b;</span><br><span class="line">    adj[a].<span class="built_in">push_back</span>(b);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (color[i] == <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="built_in">dfs</span>(i);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (res.<span class="built_in">size</span>() != <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; res.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">      cout &lt;&lt; res[i].<span class="built_in">size</span>() &lt;&lt; endl;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; res[i].<span class="built_in">size</span>(); j++) &#123;</span><br><span class="line">        cout &lt;&lt; res[i][j] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      cout &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;IMPOSSIBLE&quot;</span> &lt;&lt; endl;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>并查集也可以部分实现，前面提到，对有向图，我们可以特殊处理一下，依然拿这个例子：<code>[ [1,2], [1,3], [2,3] ]</code>,  我们首先合并<code>[1,2], [2,3]</code>，此时 <code>[1,2,3]</code>已经在一个集合中，再合并<code>[2,3]</code>, 进入构建环的逻辑:  <code>3</code> 入队，再找到 <code>2</code> 的祖先是 <code>1</code>， 将 <code>1</code> 入队，<code>1</code> 的祖先不存在，不构成环，所以可以结束遍历</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxN = <span class="number">1e5</span>+<span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> pre[maxN];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> pre2[maxN];</span><br><span class="line"></span><br><span class="line">vector&lt;vector&lt;<span class="keyword">int</span>&gt; &gt; res;</span><br><span class="line"></span><br><span class="line"><span class="comment">// <span class="doctag">TODO:</span> pre2 这个一维数组并不能处理存在入度大于 1 的顶点的情况，可以改成二维，~~广搜跑一遍~~，不对应该深度优先</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">buildCycle</span><span class="params">(<span class="keyword">int</span> start, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">  vector&lt;<span class="keyword">int</span>&gt; cycle;</span><br><span class="line">  cycle.<span class="built_in">push_back</span>(start);</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> cur = end; cur != start; cur = pre2[cur]) &#123;</span><br><span class="line">		<span class="comment">// 对于入度大于 1 的顶点，也会走到这里，所以需要判断一下查找过程中是不是到尽头了，到了就直接 return</span></span><br><span class="line">    <span class="keyword">if</span> (cur == <span class="number">-1</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    cycle.<span class="built_in">push_back</span>(cur);</span><br><span class="line">  &#125;</span><br><span class="line">  cycle.<span class="built_in">push_back</span>(start);</span><br><span class="line"></span><br><span class="line">  vector&lt;<span class="keyword">int</span>&gt; reversedCycle;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = cycle.<span class="built_in">size</span>() - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">    reversedCycle.<span class="built_in">push_back</span>(cycle[i]);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  res.<span class="built_in">push_back</span>(reversedCycle);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// cout &lt;&lt; &quot;find&quot; &lt;&lt; x &lt;&lt; endl;</span></span><br><span class="line">  <span class="keyword">return</span> x == pre[x] ? x : pre[x] = <span class="built_in">find</span>(pre[x]); <span class="comment">// 路径压缩，边查找边压缩</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 5 7</span></span><br><span class="line"><span class="comment">// 1 5</span></span><br><span class="line"><span class="comment">// 1 2</span></span><br><span class="line"><span class="comment">// 1 3</span></span><br><span class="line"><span class="comment">// 3 4</span></span><br><span class="line"><span class="comment">// 4 2</span></span><br><span class="line"><span class="comment">// 2 5</span></span><br><span class="line"><span class="comment">// 4 1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> _union(<span class="keyword">int</span> x, <span class="keyword">int</span> y) &#123;</span><br><span class="line">  <span class="keyword">if</span> (pre2[y] == <span class="number">-1</span>) pre2[y] = x;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">int</span> fx = <span class="built_in">find</span>(x), fy = <span class="built_in">find</span>(y);</span><br><span class="line">  <span class="keyword">if</span> (fx != fy) &#123;</span><br><span class="line">    pre[fx] = fy;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> n, m;</span><br><span class="line">  cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; i++) &#123;</span><br><span class="line">    pre[i] = i;</span><br><span class="line">    pre2[i] = <span class="number">-1</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (m--) &#123;</span><br><span class="line">    <span class="keyword">int</span> a, b;</span><br><span class="line">    cin &gt;&gt; a &gt;&gt; b;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">find</span>(a) == <span class="built_in">find</span>(b) ) &#123;</span><br><span class="line">      <span class="built_in">buildCycle</span>(b, a);</span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    _union(a, b);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (res.<span class="built_in">size</span>() != <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; res.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">      cout &lt;&lt; res[i].<span class="built_in">size</span>() &lt;&lt; endl;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; res[i].<span class="built_in">size</span>(); j++) &#123;</span><br><span class="line">        cout &lt;&lt; res[i][j] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      cout &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;IMPOSSIBLE&quot;</span> &lt;&lt; endl;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里有一组数据超时主要是因为，题目其实只要找一个环，我的解法为了满足业务上可能的需要，扩充了一下，找所有环，理论上改成只找到一个环就结束，应该是可以 AC 的</p>
+<p><img data-src="https://s1.vika.cn/space/2021/09/30/95fcaa6648c2472a87781bb04a3a3425?attname=image.png" alt="1-5"></p>
+<p><strong>TODO</strong>：尚不能完美处理存在<code>入度大于 1 的顶点</code>的情况，需要将 <code>pre2</code> 变成二维，再遍历一个节点的所有父节点，<del>目前看广搜深搜都可</del></p>
+<p><del>应该使用深搜!!</del>  还是不对，广搜其实可以</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://blog.doctoroyy.net/2021/06/14/leetcode-03/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -940,104 +1084,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blog.doctoroyy.net/2019/12/01/%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://s1.vika.cn/space/2021/01/22/cb972124b3ca4f2daebd9a963d8bbc8a?attname=crop_20210121143805.jpg">
-      <meta itemprop="name" content="xiaoyu">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="xiaoyu's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/01/%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/" class="post-title-link" itemprop="url">5. Longest Palindromic Substring（最长回文子串）</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-01 23:43:50" itemprop="dateCreated datePublished" datetime="2019-12-01T23:43:50+08:00">2019-12-01</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a>
-                </span>
-            </span>
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="far fa-comment"></i>
-      </span>
-      <span class="post-meta-item-text">Disqus：</span>
-    
-    <a title="disqus" href="/2019/12/01/%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/#disqus_thread" itemprop="discussionUrl">
-      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/12/01/最长回文子串/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="5-Longest-Palindromic-Substring"><a href="#5-Longest-Palindromic-Substring" class="headerlink" title="5. Longest Palindromic Substring"></a>5. Longest Palindromic Substring</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Given a string s, find the longest palindromic substring in s. </span><br><span class="line">You may assume that the maximum length of s is 1000.</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>Example 1:</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: &quot;babad&quot;</span><br><span class="line">Output: &quot;bab&quot;</span><br><span class="line">Note: &quot;aba&quot; is also a valid answer.</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>Example 2:</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: &quot;cbbd&quot;</span><br><span class="line">Output: &quot;bb&quot;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/12/01/%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1109,7 +1155,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">37</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
