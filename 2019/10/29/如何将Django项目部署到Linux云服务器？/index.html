@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="generator" content="Hexo 5.4.2">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="https://s1.vika.cn/space/2021/01/22/cb972124b3ca4f2daebd9a963d8bbc8a?attname=crop_20210121143805.jpg">
   <link rel="icon" type="image/png" sizes="16x16" href="https://s1.vika.cn/space/2021/01/22/cb972124b3ca4f2daebd9a963d8bbc8a?attname=crop_20210121143805.jpg">
@@ -29,7 +29,7 @@
 <meta property="og:description" content="本文操作环境： Debian 9，lnmp1.6，Django2.1.3，Python3.6.0  主要参考了文档 查看  1. 安装 Python3.6.0由于Django2.1仅支持Python3.5以上的版本，所以需要安装Python3版本。如果直接安装Python3版本，使用时需要改变全局默认Python版本，还需要重新配置环境变量，所以推荐一个叫pyenv的Python多版本管理工具，它">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-10-29T08:55:07.000Z">
-<meta property="article:modified_time" content="2022-04-21T06:09:55.022Z">
+<meta property="article:modified_time" content="2025-08-11T13:49:06.441Z">
 <meta property="article:author" content="xiaoyu">
 <meta property="article:tag" content="服务器">
 <meta name="twitter:card" content="summary">
@@ -285,7 +285,7 @@
 <blockquote>
 <p>uWSGI can run in ‘emperor’ mode. In this mode it keeps an eye on a directory of uWSGI config files, and will spawn instances (‘vassals’) for each one it finds.</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># create a directory for the vassals</span></span><br><span class="line">sudo mkdir /etc/uwsgi</span><br><span class="line">sudo mkdir /etc/uwsgi/vassals</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># create a directory for the vassals</span></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> /etc/uwsgi</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> /etc/uwsgi/vassals</span><br></pre></td></tr></table></figure>
 <p>vassals目录下可以放置多个配置文件，uWSGI启动时将全部加载</p>
 <blockquote>
 <p><del>ps:如果实在不清楚uid, gid的话写root也不是不可以</del></p>
@@ -296,7 +296,7 @@
 <p>2019/10/30: 使用www遇到权限问题，建议root就完事了</p>
 </blockquote>
 <p>以守护进程的方式执行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uwsgi --emperor /etc/uwsgi/vassals --uid root --gid root --daemonize /var/<span class="built_in">log</span>/uwsgi-emperor.log</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uwsgi --emperor /etc/uwsgi/vassals --uid root --gid root --daemonize /var/log/uwsgi-emperor.log</span><br></pre></td></tr></table></figure>
 <p>最后一步，编写脚本，让uWSGI开机自启</p>
 <p>官方推荐的做法是新建文件 /etc/rc.local，把上面这行命令放进去</p>
 <p>不过好像不是很管用，开机时并不会自启动，还要手动执行一遍</p>
@@ -457,7 +457,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

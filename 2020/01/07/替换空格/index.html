@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="generator" content="Hexo 5.4.2">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="https://s1.vika.cn/space/2021/01/22/cb972124b3ca4f2daebd9a963d8bbc8a?attname=crop_20210121143805.jpg">
   <link rel="icon" type="image/png" sizes="16x16" href="https://s1.vika.cn/space/2021/01/22/cb972124b3ca4f2daebd9a963d8bbc8a?attname=crop_20210121143805.jpg">
@@ -29,7 +29,7 @@
 <meta property="og:description" content="替换空格题目描述： 请实现一个函数，将一个字符串中的每个空格替换成“%20”。例如，当字符串为We Are Happy.则经过替换之后的字符串为We%20Are%20Happy。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-01-07T15:07:06.000Z">
-<meta property="article:modified_time" content="2022-04-21T06:09:55.022Z">
+<meta property="article:modified_time" content="2025-08-11T13:49:06.441Z">
 <meta property="article:author" content="xiaoyu">
 <meta property="article:tag" content="刷题">
 <meta name="twitter:card" content="summary">
@@ -254,7 +254,7 @@
 <blockquote>
 <p>需要注意的是p1不能超越边界即保持p1不等于p2，<br>例如出现” abc”这样的情况，当p1,p2都指向0时，就不能再往前移动了</p>
 </blockquote>
-<h4 id="代码实现："><a href="#代码实现：" class="headerlink" title="代码实现："></a>代码实现：</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">replaceSpace</span><span class="params">(<span class="keyword">char</span> *str, <span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> numOfSpace = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (str[i] == <span class="string">&#x27; &#x27;</span>) numOfSpace++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> newStrLen = len + numOfSpace * <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">int</span> p1 = len, p2 = newStrLen;<span class="comment">//字符串的末尾是&#x27;\0&#x27;，所以p1指向len而不是len - 1</span></span><br><span class="line">    <span class="keyword">while</span> (p1 != p2) &#123;</span><br><span class="line">      <span class="keyword">while</span> (str[p1] != <span class="string">&#x27; &#x27;</span>) &#123;</span><br><span class="line">        str[p2--] = str[p1--];</span><br><span class="line">      &#125;</span><br><span class="line">      str[p2--] = <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">      str[p2--] = <span class="string">&#x27;2&#x27;</span>;</span><br><span class="line">      str[p2--] = <span class="string">&#x27;%&#x27;</span>;</span><br><span class="line">      p1--;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="代码实现："><a href="#代码实现：" class="headerlink" title="代码实现："></a>代码实现：</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">replaceSpace</span><span class="params">(<span class="type">char</span> *str, <span class="type">int</span> len)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> numOfSpace = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (str[i] == <span class="string">&#x27; &#x27;</span>) numOfSpace++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">int</span> newStrLen = len + numOfSpace * <span class="number">2</span>;</span><br><span class="line">    <span class="type">int</span> p1 = len, p2 = newStrLen;<span class="comment">//字符串的末尾是&#x27;\0&#x27;，所以p1指向len而不是len - 1</span></span><br><span class="line">    <span class="keyword">while</span> (p1 != p2) &#123;</span><br><span class="line">      <span class="keyword">while</span> (str[p1] != <span class="string">&#x27; &#x27;</span>) &#123;</span><br><span class="line">        str[p2--] = str[p1--];</span><br><span class="line">      &#125;</span><br><span class="line">      str[p2--] = <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">      str[p2--] = <span class="string">&#x27;2&#x27;</span>;</span><br><span class="line">      str[p2--] = <span class="string">&#x27;%&#x27;</span>;</span><br><span class="line">      p1--;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -409,7 +409,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

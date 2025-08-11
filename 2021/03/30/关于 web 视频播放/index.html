@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.4.0">
+<meta name="generator" content="Hexo 5.4.2">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="https://s1.vika.cn/space/2021/01/22/cb972124b3ca4f2daebd9a963d8bbc8a?attname=crop_20210121143805.jpg">
   <link rel="icon" type="image/png" sizes="16x16" href="https://s1.vika.cn/space/2021/01/22/cb972124b3ca4f2daebd9a963d8bbc8a?attname=crop_20210121143805.jpg">
@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://s1.vika.cn/space/2021/03/30/5a56cd6d28684b83ba4b977675dfc213">
 <meta property="og:image" content="https://s1.vika.cn/space/2021/03/30/f0caf28d84c9430bb7db4714a771185b">
 <meta property="article:published_time" content="2021-03-30T14:23:50.000Z">
-<meta property="article:modified_time" content="2022-04-21T06:09:55.022Z">
+<meta property="article:modified_time" content="2025-08-11T13:49:06.441Z">
 <meta property="article:author" content="xiaoyu">
 <meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
@@ -254,12 +254,12 @@
 <ul>
 <li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/MediaSource/isTypeSupported">window.MediaSource.isTypeSupported</a>, 这个方法支持传入一个包含视频 mimeType 和 codecs 的字符串，返回一个布尔值。</li>
 </ul>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mimeCodec = <span class="string">&#x27;video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="string">&#x27;MediaSource&#x27;</span> <span class="keyword">in</span> <span class="built_in">window</span> &amp;&amp; MediaSource.isTypeSupported(mimeCodec)) &#123;</span><br><span class="line">  <span class="keyword">var</span> mediaSource = <span class="keyword">new</span> MediaSource;</span><br><span class="line">  <span class="comment">//console.log(mediaSource.readyState); // closed</span></span><br><span class="line">  video.src = URL.createObjectURL(mediaSource);</span><br><span class="line">  mediaSource.addEventListener(<span class="string">&#x27;sourceopen&#x27;</span>, sourceOpen);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.error(<span class="string">&#x27;Unsupported MIME type or codec: &#x27;</span>, mimeCodec);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mimeCodec = <span class="string">&#x27;video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="string">&#x27;MediaSource&#x27;</span> <span class="keyword">in</span> <span class="variable language_">window</span> &amp;&amp; <span class="title class_">MediaSource</span>.<span class="title function_">isTypeSupported</span>(mimeCodec)) &#123;</span><br><span class="line">  <span class="keyword">var</span> mediaSource = <span class="keyword">new</span> <span class="title class_">MediaSource</span>;</span><br><span class="line">  <span class="comment">//console.log(mediaSource.readyState); // closed</span></span><br><span class="line">  video.<span class="property">src</span> = <span class="variable constant_">URL</span>.<span class="title function_">createObjectURL</span>(mediaSource);</span><br><span class="line">  mediaSource.<span class="title function_">addEventListener</span>(<span class="string">&#x27;sourceopen&#x27;</span>, sourceOpen);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;Unsupported MIME type or codec: &#x27;</span>, mimeCodec);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/canPlayType">video.canPlayType</a>, 这个方法接受参数与上一个函数一致, 返回一个不精确的字符串描述</li>
 </ul>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">type CanPlayTypeResult = <span class="string">&quot;&quot;</span> | <span class="string">&quot;maybe&quot;</span> | <span class="string">&quot;probably&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 检测您的浏览器是否能播放不同类型的视频</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param </span>type 可播放类型，&#x27;video/mp4; codecs=&quot;avc1.64001E, mp4a.40.5&quot;&#x27;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">public canPlayType(type: string): CanPlayTypeResult;</span><br></pre></td></tr></table></figure>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">type <span class="title class_">CanPlayTypeResult</span> = <span class="string">&quot;&quot;</span> | <span class="string">&quot;maybe&quot;</span> | <span class="string">&quot;probably&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 检测您的浏览器是否能播放不同类型的视频</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> type 可播放类型，&#x27;video/mp4; codecs=&quot;avc1.64001E, mp4a.40.5&quot;&#x27;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">public <span class="title function_">canPlayType</span>(<span class="attr">type</span>: string): <span class="title class_">CanPlayTypeResult</span>;</span><br></pre></td></tr></table></figure>
 
 <p>接下来做一个简单的实验：</p>
 <p>样品: </p>
@@ -269,7 +269,7 @@
 <li>Chrome 89.0.4389.90</li>
 </ol>
 <p>在播放前用这 2 个函数检测, 打印结果</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;avinfo: &#x27;</span>, avinfo);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;isTypeSupported: &#x27;</span>, <span class="built_in">window</span>.MediaSource.isTypeSupported(avinfo));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&#x27;canplayType: &#x27;</span>, <span class="built_in">document</span>.createElement(<span class="string">&#x27;video&#x27;</span>).canPlayType(avinfo));</span><br></pre></td></tr></table></figure>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;avinfo: &#x27;</span>, avinfo);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;isTypeSupported: &#x27;</span>, <span class="variable language_">window</span>.<span class="property">MediaSource</span>.<span class="title function_">isTypeSupported</span>(avinfo));</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;canplayType: &#x27;</span>, <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;video&#x27;</span>).<span class="title function_">canPlayType</span>(avinfo));</span><br></pre></td></tr></table></figure>
 
 <p>结果如下：</p>
 <p><img data-src="https://s1.vika.cn/space/2021/03/30/d046027ce0b7441a9956e822540dc08d" alt="%E5%85%B3%E4%BA%8E%20web%20%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%20d9b5d2946e3f444b82a369e48f57a400/Untitled%203.png"></p>
@@ -451,7 +451,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
